@@ -5,13 +5,15 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { width } from '@material-ui/system';
 
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 150,
+    minWidth: 70,
     opacity: 0.8,
-    backgroundColor: "#9b9b9b"
+    backgroundColor: "#9b9b9b",
+    width: "8%"
 },
   bullet: {
     display: 'inline-block',

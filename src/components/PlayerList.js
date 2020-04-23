@@ -86,17 +86,13 @@ class PlayerList extends Component {
         console.log("render");
         const { players, confirmedPlayers } = this.state;
         return(
-            <div className="App">
-                    <h2>JUGADORES DISPONIBLES</h2>
-                    <br/><br/>
-
-                        {
-                            players.length === 0 
+            <div style={{height: "180px", display: "table", width: "100%", margin: "2", position: "relative"}}>
+            {/* <Container > */}
+                    {
+                        players.length === 0 
                                 ? <strong>No hay jugadores disponibles por el momento</strong> 
-                                : 
-                                <Container>
-                                <Grid container spacing={10} >
-                                  <Grid item xs={6} >
+                                : <container style={{maxWidth: "inherit", position: "relative", height: "100%"}} >
+                                  <Grid direction="row"  container >
                                     {
                                         players.map( player => {
                                             return (
@@ -111,32 +107,15 @@ class PlayerList extends Component {
                                             )
                                         })
                                     }
-                                  </Grid>
-                                  <Grid  item xs={6} >
-                                    {
-                                        confirmedPlayers.map( confirmedPlayer => {
-                                            return (
-                                                <Card 
-                                                    key={confirmedPlayer._id}
-                                                    player={confirmedPlayer}
-                                                    //name={confirmedPlayer.name}
-                                                    //nick={confirmedPlayer.nickname}
-                                                    confirmed={true}
-                                                    functionClick={this.handleGetOffTheList}
-                                                />                                                
-                                            )
-                                        })
-                                    }
                                   </Grid> 
-                                  </Grid>  
-                                  </Container>       
-                        }
+</container>
+                    }
 
-                <br/><br/>
 
                 <div>
                     <button onClick={this.handleUpdateClick}>Actualizar</button>
                 </div>
+                {/* </Container> */}
             </div>
             
         );

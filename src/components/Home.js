@@ -3,7 +3,9 @@ import { render } from '@testing-library/react';
 
 import PlayerList from './PlayerList';
 import MenuBar from './MenuBar';
-
+import Court from './Court';
+import { Hidden } from '@material-ui/core';
+import { saddlebrown } from 'color-name';
 
 
 
@@ -21,12 +23,14 @@ class Home extends Component {
 
 
     render(){
-        console.log("render");
+
         const { players, confirmedPlayers } = this.state;
+
         return(
-            <div>
+            <div style={{position: "static"}}>
                 <MenuBar />
                 <PlayerList />
+                <Court />
             </div>
         );
 
