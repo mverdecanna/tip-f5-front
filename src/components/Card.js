@@ -5,14 +5,27 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { width, height } from '@material-ui/system';
 
 
 const useStyles = makeStyles({
   root: {
     minWidth: 150,
     opacity: 0.8,
-    backgroundColor: "#9b9b9b"
+    backgroundColor: "#9b9b9b",
+    width: "45%",
+    height: "138px"
 },
+
+play: {
+  minWidth: 150,
+  opacity: 0.8,
+  backgroundColor: "#00c3f8",
+  padding: "13px",
+  width: "45%",
+  height: "123px"
+},
+
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -23,13 +36,6 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
-  },
-
-  play: {
-    minWidth: 150,
-    opacity: 0.8,
-    backgroundColor: "#00c3f8",
-    padding: "13px"
   }
 
 });
@@ -58,8 +64,8 @@ export default function SimpleCard(props) {
 
       </CardContent>
 
-      <CardActions>
-        <Button size="small" color="secondary" onClick={ () => functionClick(player) }> {label} </Button>   
+      <CardActions >
+        <Button size="medium" color="secondary" onClick={ () => functionClick(player) }> {label} </Button>   
       </CardActions>
       {/* onClick={} */}
     </Card>
