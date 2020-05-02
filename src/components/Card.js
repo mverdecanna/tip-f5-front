@@ -5,7 +5,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { width, height } from '@material-ui/system';
+
 
 
 const useStyles = makeStyles({
@@ -21,9 +21,18 @@ play: {
   minWidth: 150,
   opacity: 0.8,
   backgroundColor: "#00c3f8",
-  padding: "13px",
+  //padding: "16px",
   width: "45%",
-  height: "123px"
+  height: "138px"
+},
+
+play_user: {
+  minWidth: 150,
+  opacity: 0.8,
+  backgroundColor: "#D4AF37",
+  //padding: "13px",
+  width: "45%",
+  height: "138px"
 },
 
   bullet: {
@@ -40,15 +49,23 @@ play: {
 
 });
 
+
 export default function SimpleCard(props) {
 
   const classes = useStyles();
 
-  const { player, confirmed, functionClick } = props;
+  const { player, confirmed, functionClick, logged, isAdmin} = props;
 
-  const style = confirmed ? classes.play : classes.root;
+  console.log(`****  SimpleCard -->  confirmed:  ${ JSON.stringify(confirmed) }`);
+  console.log(`****  SimpleCard -->  player.email:  ${ JSON.stringify(player.email) }`);
+
+  const style = logged ? classes.play_user : ( confirmed ? classes.play : classes.root )
+
+  //const style = confirmed ? classes.play : classes.root;
+
   const label = !confirmed ? "Me anoto!" : "Me bajo!";
-  
+  //console.log(`****  SimpleCard -->  label:  ${ JSON.stringify(label) }`);
+
 
   return (
     <Card className={style} >
@@ -64,10 +81,10 @@ export default function SimpleCard(props) {
 
       </CardContent>
 
-      <CardActions >
-        <Button size="medium" color="secondary" onClick={ () => functionClick(player) }> {label} </Button>   
+      <CardActions>
+        <Button disabled={ ( !isAdmin && !logged ) } size="medium" color="secondary" onClick={ () => functionClick(player) }> {label} </Button>   
       </CardActions>
-      {/* onClick={} */}
+
     </Card>
   );
 }

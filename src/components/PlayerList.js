@@ -16,15 +16,21 @@ const silbato = new UIfx({asset: whistle});
 
 class PlayerList extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        const { role } = this.props;
+        console.log(`**** PlayerList  constructor  role:  ${ JSON.stringify(role) }`);
         this.state = {
             players: [],
             confirmedPlayers: [],
             gameConfirmed: false,
             tenPlayersConfirmed: false,
-            buttonConfirmGame: false
+            buttonConfirmGame: false,
+            isAdmin: (role === "ADMIN")
         };
+
+        // const { userEmail } = this.props;
+        console.log(`****  PlayerList  constructor  isAdmin:  ${ JSON.stringify(this.state.isAdmin) }`);
         console.log("constructor");
     }
 
@@ -121,10 +127,13 @@ class PlayerList extends Component {
  
     render(){
         console.log("render");
-        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame } = this.state;
+        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame, isAdmin } = this.state;
+        const { userEmail } = this.props;
+       // console.log(`****  PlayerList  render  userEmail:  ${ JSON.stringify(userEmail) }`);
         return(
             <div className="App">
-<audio id="audio" ><source src={whistle} type="audio/mp3" ></source></audio>
+                    <audio id="audio" ><source src={whistle} type="audio/mp3" ></source></audio>
+
                     <div style={{display: "inline-flex", justifyContent: "space-between", width: "90%", fontFamily: "fantasy", fontSize: "xx-large"}}>
                         <h1>JUGADORES DISPONIBLES</h1>
                             
@@ -151,10 +160,10 @@ class PlayerList extends Component {
                                                 <Card 
                                                     key={player._id}
                                                     player={player}
-                                                    //name={player.name}
-                                                    //nick={player.nickname}
                                                     confirmed={false}
                                                     functionClick={this.handleConfirmPlayer}
+                                                    logged={ userEmail === player.email }
+                                                    isAdmin={isAdmin}
                                                 />                                                
                                             )
                                         })
@@ -167,17 +176,17 @@ class PlayerList extends Component {
                                                 <Card 
                                                     key={confirmedPlayer._id}
                                                     player={confirmedPlayer}
-                                                    //name={confirmedPlayer.name}
-                                                    //nick={confirmedPlayer.nickname}
                                                     confirmed={true}
                                                     functionClick={this.handleGetOffTheList}
+                                                    logged={ userEmail === confirmedPlayer.email }
+                                                    isAdmin={isAdmin}
                                                 />                                                
                                             )
                                         })
                                     }
                                   </Grid> 
-                                  </Grid>  
-                                  </Container>       
+                                </Grid>  
+                                </Container>       
                         }
 
                 <br/><br/>

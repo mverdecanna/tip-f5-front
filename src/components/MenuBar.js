@@ -7,8 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import f5_logo from '../f5_logo.png';
-import f5_redondo from '../logo_redondo.png';
+import f5_redondo from '../images/logo_redondo.png';
 
 
 
@@ -34,7 +33,7 @@ export default function ButtonAppBar() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h" className={classes.title}  >
+          <Typography variant="h3" className={classes.title}  >
         
             <img src={f5_redondo}  alt="logo" width="52px" />
           </Typography>

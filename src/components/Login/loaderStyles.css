@@ -1,0 +1,17 @@
+.loadingSpinner{
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 47px;
+}
+.loadingSpinner>div{
+    width: 70px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.loadingSpinner p{
+    margin-top: 10px;
+    color: #f0ad4e;
+    text-align: center;
+}

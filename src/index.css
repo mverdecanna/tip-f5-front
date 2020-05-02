@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: transparent;
 }
 
 
@@ -15,7 +16,7 @@ code {
 
 
 html { 
-  background: url("../src/cancha_gde.jpg") no-repeat center center fixed; 
+  background: url("../src/images/cancha_gde.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

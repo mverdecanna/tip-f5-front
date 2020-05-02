@@ -1,15 +1,17 @@
 import axios from 'axios';
 
+const { host_backend, 
+        endpoint_getAllPlayers, 
+        tokenKey } = require("../config/keys");
 
-//export default class PlayerService {
 
 
 
     const getPlayers = async () => {
-        const endpoint = "http://localhost:18080/api/getAllPlayers";
+        const endpoint = host_backend + endpoint_getAllPlayers;
         //const endpoint = "http://068742ee.ngrok.io/api/getAllPlayers";
 
-        const players = await axios.get(endpoint);
+        const players = await axios.get(endpoint, { headers: { 'TOKEN': tokenKey } });
 
         console.log(`******  PLAYERS:  ${players}`);
 
