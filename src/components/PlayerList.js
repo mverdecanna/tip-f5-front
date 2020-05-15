@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 
-//import SuperList from './SuperList';
 import Card from './Card';
 import playerService from '../services/PlayerService';
+import gameService from '../services/GameService';
 import { Grid, Container } from '@material-ui/core';
 import DialogConfirmGame from './DialogConfirmGame';
 import ConfirmGame from './ConfirmGame';
+import SuspendGame from './SuspendGame';
 import UIfx from 'uifx';
-import whistle from '../Whistle-noise.mp3';
+import whistle from '../sounds/Whistle-noise.mp3';
+import boo from '../sounds/boo.mp3';
+import helper from '../util/Helper';
+
 import { delay } from 'q';
 
 
@@ -23,7 +27,9 @@ class PlayerList extends Component {
         this.state = {
             players: [],
             confirmedPlayers: [],
+            gameDate: null,
             gameConfirmed: false,
+            gameSuspended: false,
             tenPlayersConfirmed: false,
             buttonConfirmGame: false,
             isAdmin: (role === "ADMIN")
@@ -36,7 +42,17 @@ class PlayerList extends Component {
 
 
     componentWillMount(){
+        this.handleDateOfTheCurrentGame();
         this.handleUpdateClick();
+    }
+
+
+    handleDateOfTheCurrentGame = () => {
+        const date = helper.getDateOfTheNextGame(2); // 2 = martes
+
+        this.setState({
+            gameDate: date
+        });
     }
 
 
@@ -45,9 +61,38 @@ class PlayerList extends Component {
         const result = await playerService.getPlayers();
         
         console.log(`****  result:  ${ JSON.stringify(result) }`);
+        // this.setState({
+        //     players: result.data
+        // });
+        this.handleGameInit(result.data)
+    }
+
+
+    handleGameInit = async (players) => {
+        console.log(`****  - players:  ${ JSON.stringify(players) }`);
+        const { gameDate } = this.state;
+
+        const game = await gameService.getNextGame(gameDate);
+        console.log(`****  game:  ${ JSON.stringify(game) }`);
+
+        const { confirmedPlayers, status } = game.data;
+        console.log(`****  - confirmedPlayers:  ${ JSON.stringify(confirmedPlayers) }`);
         
+        //const filteredPlayers = players.filter(player => !confirmedPlayers.includes(player));
+        // const filteredPlayers = confirmedPlayers.length === 0 ? players 
+        //                             : players.filter( ({ email: id_1 }) => confirmedPlayers.some( ({ email: id_2 }) => id_2 !== id_1) );
+        
+
+        const filteredPlayers = players.filter(player => !helper.playerIsIncludeInTheList(player, confirmedPlayers));
+
+        console.log(`****  - filteredPlayers:  ${ JSON.stringify(filteredPlayers) }`);
+
         this.setState({
-            players: result.data
+            confirmedPlayers: confirmedPlayers,
+            players: filteredPlayers,
+            gameConfirmed: ( status === "CONFIRMED" ),
+            buttonConfirmGame: ( status === "CONFIRMED" ),
+            gameSuspended: ( status === "SUSPENDED" )
         });
     }
 
@@ -55,10 +100,10 @@ class PlayerList extends Component {
     handleConfirmPlayer = async (playerConfirm) => {
         console.log(`****  PLAYER:  ${playerConfirm}`);
 
-        const { players, confirmedPlayers } = this.state;
+        const { players, confirmedPlayers, gameDate, gameSuspended } = this.state;
         var areTen = confirmedPlayers.length === 9;
         
-        if(confirmedPlayers.length < 10){
+        if(confirmedPlayers.length < 10 && !gameSuspended){
             const updateAvailables = players.filter( player => {
                 return player.name !== playerConfirm.name
             });
@@ -68,6 +113,7 @@ class PlayerList extends Component {
                 confirmedPlayers: [...confirmedPlayers, playerConfirm],
                 tenPlayersConfirmed: areTen
             });
+            this.handleUpdateGamePlayers(gameDate, [...confirmedPlayers, playerConfirm]);
         }
         console.log(`****  ARE TEN:  ${areTen}`);
     }
@@ -76,9 +122,9 @@ class PlayerList extends Component {
     handleGetOffTheList = async (player) => {
         //console.log(`****  PLAYER:  ${ JSON.stringify(player) }`);
 
-        const { players, confirmedPlayers, buttonConfirmGame, gameConfirmed } = this.state;
+        const { players, confirmedPlayers, gameDate, gameConfirmed, gameSuspended } = this.state;
         
-        if(!gameConfirmed){
+        if(!gameConfirmed && !gameSuspended){
 
             const updatedConfirmedPlayer = confirmedPlayers.filter( confirmed => {
                 return confirmed._id !== player._id
@@ -89,8 +135,16 @@ class PlayerList extends Component {
                 confirmedPlayers: updatedConfirmedPlayer,
                 buttonConfirmGame: false
             });
+
+            this.handleUpdateGamePlayers(gameDate, updatedConfirmedPlayer);
         }
 
+    }
+
+
+    handleUpdateGamePlayers = async (date, confirmedPlayers) => {
+        const result = gameService.updateGamePlayers(date, confirmedPlayers);
+        console.log(`****  result:  ${ result }`);
     }
 
 
@@ -112,6 +166,19 @@ class PlayerList extends Component {
         this.setState({
             gameConfirmed: true
         })
+        const { gameDate } = this.state;
+        const result = gameService.confirmGame(gameDate);
+        console.log(`****  handleConfirmGame  result:  ${ result }`);
+    }
+
+
+    handleSuspendGame = () => {
+        this.setState({
+            gameSuspended: true
+        })
+        const { gameDate } = this.state;
+        const result = gameService.suspendGame(gameDate);
+        console.log(`****  handleSuspendGame  result:  ${ result }`);
     }
 
 
@@ -119,27 +186,45 @@ class PlayerList extends Component {
         //silbato.play();
         setTimeout(function() {
             
-            document.getElementById('audio').play();
+            document.getElementById('audio_whistle').play();
 
         }, 2000);
     }
 
+
+    effectBoo = () => {
+        //silbato.play();
+        setTimeout(function() {
+            
+            document.getElementById('audio_boo').play();
+
+        }, 2000);
+    }
+
+
+
  
     render(){
         console.log("render");
-        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame, isAdmin } = this.state;
+        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame, isAdmin, gameConfirmed, gameSuspended } = this.state;
         const { userEmail } = this.props;
        // console.log(`****  PlayerList  render  userEmail:  ${ JSON.stringify(userEmail) }`);
         return(
             <div className="App">
-                    <audio id="audio" ><source src={whistle} type="audio/mp3" ></source></audio>
+                    <audio id="audio_whistle" ><source src={whistle} type="audio/mp3" ></source></audio>
+                    <audio id="audio_boo" ><source src={boo} type="audio/mp3" ></source></audio>
 
                     <div style={{display: "inline-flex", justifyContent: "space-between", width: "90%", fontFamily: "fantasy", fontSize: "xx-large"}}>
                         <h1>JUGADORES DISPONIBLES</h1>
                             
                             {
                                 buttonConfirmGame ? <ConfirmGame confirm={this.handleConfirmGame}
-                                                                 effect={this.effectWhistle} /> : <p/>
+                                                                 effect={this.effectWhistle} 
+                                                                 statusConfirmed={gameConfirmed} /> 
+
+                                                  : <SuspendGame suspend={this.handleSuspendGame}
+                                                                 effect={this.effectBoo}
+                                                                 statusSuspended={gameSuspended} />
                             }
                             
                         <h1>JUGADORES CONFIRMADOS</h1>

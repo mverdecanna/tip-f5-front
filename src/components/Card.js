@@ -29,7 +29,7 @@ play: {
 play_user: {
   minWidth: 150,
   opacity: 0.8,
-  backgroundColor: "#D4AF37",
+  backgroundColor: "#c2ff07d9", //"#D4AF37",
   //padding: "13px",
   width: "45%",
   height: "138px"

@@ -1,4 +1,5 @@
 
+import moment from 'moment';
 
 
 
@@ -14,8 +15,37 @@
 
 
 
+    const getDateOfTheNextGame = (dayOfWeek) => {
+
+        const theDayInThisWeek = moment().day(dayOfWeek).startOf('day');
+        const nextDate = moment().day(dayOfWeek + 7).startOf('day');
+        const today = moment().startOf('day');
+        
+        const result = ( theDayInThisWeek.isSameOrAfter(today) ) ? theDayInThisWeek : nextDate;
+        console.log(`*-*-*-*-*-*-*-*-*-*   getNextDayOfWeek  RESULT: ${JSON.stringify(result)}`);
+        return result;
+    }
+
+
+
+    const playerIsIncludeInTheList = (player, confirmedPlayers) => {
+
+        return confirmedPlayers.map(confirmed => getEmail(confirmed)).includes(player.email);
+    }
+
+
+    const getEmail = (player) => {
+        console.log(`*-*-*-*-*-*-*-*-*-*   getEmail  player: ${JSON.stringify(player)}`);
+        return player.email;
+    }
+
+    
+
+
     const Helper = {
-        validLoginInputs
+        validLoginInputs,
+        getDateOfTheNextGame,
+        playerIsIncludeInTheList
     };
     
     export default Helper;
