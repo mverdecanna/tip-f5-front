@@ -10,11 +10,12 @@ const { host_backend,
     const loginUser = async ( username, password ) => {
 
         const endpoint = host_backend + endpoint_login;
-        //const endpoint = "http://068742ee.ngrok.io/api/getAllPlayers";
+
+        var user = {};
 
         console.log(`****  tokenKey:  ${ tokenKey }`);
 
-        const user = await axios.post(endpoint, { data: {
+        const result = await axios.post(endpoint, { data: {
                                                     email: username,
                                                     password: password
                                                     }
@@ -36,9 +37,14 @@ const { host_backend,
             //result = 'ERROR';
         });
 
-        console.log(`***********--  USER:  ${ JSON.stringify(user.data) }`);
+        console.log(`***********--  USER data:  ${ JSON.stringify(user.data) }`);
+        if(result && result.data){
+            user = result.data;
+        }
 
-        return user.data;
+        console.log(`***********--  USER:  ${ JSON.stringify(user) }`);
+
+        return user;
     }
 
 
