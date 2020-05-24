@@ -11,7 +11,7 @@ const { host_backend,
 
 
 
-    const getNextGame = async (date) => {
+    const getNextGame = async (group, date) => {
 
         //const date = getDateOfTheNextGame(dayOfWeek);
 
@@ -19,6 +19,7 @@ const { host_backend,
         console.log(`*-*-*-*-*-*  getNextGame   endpoint:  ${endpoint}`);
 
         const result = await axios.post(endpoint, {   data: {
+                                                        group: group,
                                                         date: date
                                                     }
                                                 }, {
@@ -34,12 +35,13 @@ const { host_backend,
 
 
 
-    const updateGamePlayers = async (date, players) => {
+    const updateGamePlayers = async (group, date, players) => {
         
         const endpoint = host_backend + endpoint_updateGamePlayers;
         console.log(`*-*-*-*-*-*  getNextGame   endpoint:  ${endpoint}`);
 
         const result = await axios.put(endpoint, {   data: {
+                                                        group: group,
                                                         dayOfTheMatch: date,
                                                         confirmedPlayers: players
                                                     }
@@ -54,12 +56,13 @@ const { host_backend,
     
   
     
-    const confirmGame = async (date) => {
+    const confirmGame = async (group, date) => {
         
         const endpoint = host_backend + endpoint_confirmGame;
         console.log(`*-*-*-*-*-*  confirmGame   endpoint:  ${endpoint}`);
 
         const result = await axios.put(endpoint, {   data: {
+                                                        group: group,
                                                         dayOfTheMatch: date
                                                     }
                                                 }, {
@@ -73,12 +76,13 @@ const { host_backend,
     
     
     
-    const suspendGame = async (date) => {
+    const suspendGame = async (group, date) => {
         
         const endpoint = host_backend + endpoint_suspendGame;
         console.log(`*-*-*-*-*-*  suspendGame   endpoint:  ${endpoint}`);
 
         const result = await axios.put(endpoint, {   data: {
+                                                        group: group,
                                                         dayOfTheMatch: date
                                                     }
                                                 }, {

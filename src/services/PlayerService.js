@@ -7,11 +7,16 @@ const { host_backend,
 
 
 
-    const getPlayers = async () => {
+    const getPlayers = async (group) => {
         const endpoint = host_backend + endpoint_getAllPlayers;
         //const endpoint = "http://068742ee.ngrok.io/api/getAllPlayers";
 
-        const players = await axios.get(endpoint, { headers: { 'TOKEN': tokenKey } });
+        const players = await axios.get(endpoint, { 
+                                                    headers: { 'TOKEN': tokenKey },
+                                                    params: {
+                                                        group: group
+                                                    } 
+        });
 
         console.log(`******  PLAYERS:  ${players}`);
 

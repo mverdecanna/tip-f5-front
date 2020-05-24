@@ -12,10 +12,9 @@ import whistle from '../sounds/Whistle-noise.mp3';
 import boo from '../sounds/boo.mp3';
 import helper from '../util/Helper';
 
-import { delay } from 'q';
+//import { delay } from 'q';
 
-
-const silbato = new UIfx({asset: whistle});
+//const silbato = new UIfx({asset: whistle});
 
 
 class PlayerList extends Component {
@@ -23,7 +22,8 @@ class PlayerList extends Component {
     constructor(props){
         super(props);
         const { role } = this.props;
-        console.log(`**** PlayerList  constructor  role:  ${ JSON.stringify(role) }`);
+        console.log(`**** PlayerList  constructor  role:  ${ role }`);
+
         this.state = {
             players: [],
             confirmedPlayers: [],
@@ -57,8 +57,9 @@ class PlayerList extends Component {
 
 
     handleUpdateClick = async () => {
+        const { group } = this.props;
 
-        const result = await playerService.getPlayers();
+        const result = await playerService.getPlayers(group);
         
         console.log(`****  result:  ${ JSON.stringify(result) }`);
         // this.setState({
@@ -70,9 +71,10 @@ class PlayerList extends Component {
 
     handleGameInit = async (players) => {
         console.log(`****  - players:  ${ JSON.stringify(players) }`);
+        const { group } = this.props;
         const { gameDate } = this.state;
 
-        const game = await gameService.getNextGame(gameDate);
+        const game = await gameService.getNextGame(group, gameDate);
         console.log(`****  game:  ${ JSON.stringify(game) }`);
 
         const { confirmedPlayers, status } = game.data;
@@ -143,7 +145,8 @@ class PlayerList extends Component {
 
 
     handleUpdateGamePlayers = async (date, confirmedPlayers) => {
-        const result = gameService.updateGamePlayers(date, confirmedPlayers);
+        const { group } = this.props;
+        const result = gameService.updateGamePlayers(group, date, confirmedPlayers);
         console.log(`****  result:  ${ result }`);
     }
 
@@ -166,8 +169,9 @@ class PlayerList extends Component {
         this.setState({
             gameConfirmed: true
         })
+        const { group } = this.props;
         const { gameDate } = this.state;
-        const result = gameService.confirmGame(gameDate);
+        const result = gameService.confirmGame(group, gameDate);
         console.log(`****  handleConfirmGame  result:  ${ result }`);
     }
 
@@ -176,8 +180,9 @@ class PlayerList extends Component {
         this.setState({
             gameSuspended: true
         })
+        const { group } = this.props;
         const { gameDate } = this.state;
-        const result = gameService.suspendGame(gameDate);
+        const result = gameService.suspendGame(group, gameDate);
         console.log(`****  handleSuspendGame  result:  ${ result }`);
     }
 
