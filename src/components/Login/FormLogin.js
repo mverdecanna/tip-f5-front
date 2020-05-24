@@ -12,12 +12,14 @@ const FormLogin = (props) => {
         
         let username = document.getElementById("inputEmail").value;
         let password = document.getElementById("inputPassword").value;
+        let group = document.getElementById("inputGroup").value;
         
 
         console.log(` ************  username  ${username} `);
         console.log(` ************  password  ${password} `);
+        console.log(` ************  group  ${group} `);
                 
-        props.doLogin({ username, password });
+        props.doLogin({ username, password, group });
     };
 
     
@@ -30,12 +32,17 @@ const FormLogin = (props) => {
                 </div>
 
                 <div id="Login">
+
                     <div className="form-group">
                         <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
                     </div>
 
                     <div className="form-group">
                         <input type="password" className="form-control" id="inputPassword" placeholder="Contraseña" required="true"/>
+                    </div>
+
+                    <div className="form-group">
+                        <input type="text" className="form-control" id="inputGroup" placeholder="Grupo" />
                     </div>
 
                     <div className="forgot">

@@ -39,14 +39,15 @@ class App extends Component {
 
   render(){
 
-    const { userEmail, userRole } = this.props;
+    const { userEmail, userRole, group } = this.props;
     console.log(`****  App  render  userEmail:  ${ JSON.stringify(userEmail) }`);
+    console.log(`****  App  render  group:  ${ JSON.stringify(group) }`);
 
     return(
       <div className="App">
 
         <header router={this.props.router}></header>
-        <Home userEmail={userEmail} role={userRole} />
+        <Home userEmail={userEmail} role={userRole} group={group}/>
 
       </div>
     )

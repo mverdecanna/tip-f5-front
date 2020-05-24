@@ -23,7 +23,9 @@ class Login extends Component {
     }
 
     
-    doLogin = async ({username, password}) => {
+    doLogin = async ({username, password, group}) => {
+
+        console.log(`****  group:  ${ JSON.stringify(group) }`);
 
         this.setState({
             loading: true
@@ -31,9 +33,9 @@ class Login extends Component {
 
         if( Helper.validLoginInputs(username, password) ){
 
-            const { authorize, logger, role } = this.props;
+            const { authorize, logger, role, grouping } = this.props;
     
-            const user = await UserService.loginUser(username, password);
+            const user = await UserService.loginUser(username, password, group);
     
             if( user.email ){
                 console.log(`****  doLogin -->  user:  ${ JSON.stringify(user) }`);
@@ -44,6 +46,8 @@ class Login extends Component {
                 logger(user.email);
     
                 role(user.role);
+
+                grouping(group);
     
                 this.props.router.push('/');
             }else{

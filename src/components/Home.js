@@ -31,14 +31,15 @@ class Home extends Component {
     render(){
         console.log("render");
         //const { players, confirmedPlayers } = this.state;
-        const { userEmail, role } = this.props;
+        const { userEmail, role, group } = this.props;
         console.log(`****  Home  render  userEmail:  ${ JSON.stringify(userEmail) }`);
         console.log(`****  Home  render  role:  ${ JSON.stringify(role) }`);
+        console.log(`****  Home  render  group:  ${ JSON.stringify(group) }`);
 
         return(
             <div>
-                <MenuBar userEmail={userEmail} role={role}/>
-                <PlayerList userEmail={userEmail} role={role}/>
+                <MenuBar userEmail={userEmail} role={role} group={group}/>
+                <PlayerList userEmail={userEmail} role={role} group={group}/>
             </div>
         );
 

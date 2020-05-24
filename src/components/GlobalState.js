@@ -13,7 +13,8 @@ class GlobalState extends Component {
 
             authOK: false,
             userEmail: "",
-            userRole: ""
+            userRole: "",
+            group: ""
         }
     }
 
@@ -41,6 +42,14 @@ class GlobalState extends Component {
         });
     }
 
+    
+    loggedGroup = (group) => {
+
+        this.setState({
+            group: group
+        });
+    }
+
 
 
     render(){
@@ -52,7 +61,9 @@ class GlobalState extends Component {
                                                 {...this.state, 
                                                     authorize: this.userAuthorized, 
                                                     logger: this.loggedEmail,
-                                                    role: this.loggedUserRole })
+                                                    role: this.loggedUserRole,
+                                                    grouping: this.loggedGroup
+                                                })
                     }
                 </Fragment>
             )

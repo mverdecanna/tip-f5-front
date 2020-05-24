@@ -7,7 +7,7 @@ const { host_backend,
 
 
 
-    const loginUser = async ( username, password ) => {
+    const loginUser = async ( username, password, group ) => {
 
         const endpoint = host_backend + endpoint_login;
 
@@ -17,7 +17,8 @@ const { host_backend,
 
         const result = await axios.post(endpoint, { data: {
                                                     email: username,
-                                                    password: password
+                                                    password: password,
+                                                    group: group
                                                     }
                                                  }, {
                                         headers: {
