@@ -15,5 +15,6 @@ module.exports = {
     endpoint_updateGamePlayers: '/updateGamePlayers',
     endpoint_confirmGame: '/confirmGame',
     endpoint_suspendGame: '/suspendGame',
+    endpoint_updateDataOfTheGame: '/updateDataOfTheGame',
     
 };

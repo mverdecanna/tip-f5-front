@@ -1,0 +1,88 @@
+// import React, { Component } from 'react';
+// import { InlineDatePicker } from 'material-ui-pickers';
+// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+// import lightBlue from '@material-ui/core/colors/lightBlue';
+
+
+// const materialTheme = createMuiTheme({
+//     overrides: {
+//       MuiPickersToolbar: {
+//         toolbar: {
+//           backgroundColor: lightBlue.A200,
+//         },
+//       },
+//       MuiPickersCalendarHeader: {
+//         switchHeader: {
+//           // backgroundColor: lightBlue.A200,
+//           // color: 'white',
+//         },
+//       },
+//       MuiPickersDay: {
+//         day: {
+//           color: '#f0ad4e',
+//         },
+//         isSelected: {
+//           backgroundColor: '#f0ad4e',
+//         },
+//         current: {
+//           color: lightBlue['900'],
+//         },
+//       },
+//       MuiPickersModal: {
+//         dialogAction: {
+//           color: lightBlue['400'],
+//         },
+//       },
+//     },
+// });
+
+// class DatePicker extends Component {
+
+//     state = {
+//         selectedDate: null,
+//     };
+
+//     handleDateChange = date => {
+//         this.setState({ selectedDate: date });
+
+//         if (this.props.onDateChange) {
+//             this.props.onDateChange(this.formatDate(date));
+//         }
+//     };
+
+//     formatDate = (date) => {
+//         let formatedDate = `${date.getFullYear()}-${this.addZerosToLeft(date.getMonth()+1)}-${this.addZerosToLeft(date.getDate())}`;
+
+//         return formatedDate;
+//     };
+
+//     addZerosToLeft(number) {
+//         let my_string = '' + number;
+//         if (my_string.length < 2) {
+//             my_string = '0' + my_string;
+//         }
+//         return my_string;
+//     }
+
+//     render() {
+//         const { selectedDate } = this.state;
+//         const { label, style } = this.props;
+
+//         return (
+//              <MuiThemeProvider theme={materialTheme}>
+//                 <InlineDatePicker
+//                     format="dd/MM/yyyy"
+//                     onlyCalendar
+//                     variant="outlined"
+//                     label={label}
+//                     value={selectedDate}
+//                     onChange={this.handleDateChange}
+//                     style={style}
+//                 />
+//              </MuiThemeProvider>  
+//         );  
+//     };
+
+// }
+
+// export default DatePicker;

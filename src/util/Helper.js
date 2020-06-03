@@ -27,6 +27,18 @@ import moment from 'moment';
     }
 
 
+    const getDateOfThePreviousGame = (dayOfWeek) => {
+
+        const theDayInThisWeek = moment().day(dayOfWeek).startOf('day');
+        const previousDate = moment().day(dayOfWeek - 7).startOf('day');
+        const today = moment().startOf('day');
+        
+        const result = ( theDayInThisWeek.isBefore(today) ) ? theDayInThisWeek : previousDate;
+        console.log(`*-*-*-*-*-*-*-*-*-*   getDateOfThePreviousGame  RESULT: ${JSON.stringify(result)}`);
+        return result;
+    }
+
+
 
     const playerIsIncludeInTheList = (player, confirmedPlayers) => {
 
@@ -39,13 +51,38 @@ import moment from 'moment';
         return player.email;
     }
 
+
+
+    const formatResult = (result) => {
+
+        var description = "";
+
+        if(result){
+
+            if(result === "checkedWinA"){
+
+                description = "Gano A";
+
+            }else if(result === "checkedWinB"){
+
+                description = "Gano B";
+
+            }else{
+
+                description = "Empate";
+            }
+        }
+        return description;
+    }
     
 
 
     const Helper = {
         validLoginInputs,
         getDateOfTheNextGame,
-        playerIsIncludeInTheList
+        playerIsIncludeInTheList,
+        getDateOfThePreviousGame,
+        formatResult,
     };
     
     export default Helper;

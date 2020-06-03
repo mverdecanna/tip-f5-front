@@ -77,25 +77,23 @@ class PlayerList extends Component {
         const game = await gameService.getNextGame(group, gameDate);
         console.log(`****  game:  ${ JSON.stringify(game) }`);
 
-        const { confirmedPlayers, status } = game.data;
-        console.log(`****  - confirmedPlayers:  ${ JSON.stringify(confirmedPlayers) }`);
-        
-        //const filteredPlayers = players.filter(player => !confirmedPlayers.includes(player));
-        // const filteredPlayers = confirmedPlayers.length === 0 ? players 
-        //                             : players.filter( ({ email: id_1 }) => confirmedPlayers.some( ({ email: id_2 }) => id_2 !== id_1) );
-        
+        if( game && game.data ){
 
-        const filteredPlayers = players.filter(player => !helper.playerIsIncludeInTheList(player, confirmedPlayers));
-
-        console.log(`****  - filteredPlayers:  ${ JSON.stringify(filteredPlayers) }`);
-
-        this.setState({
-            confirmedPlayers: confirmedPlayers,
-            players: filteredPlayers,
-            gameConfirmed: ( status === "CONFIRMED" ),
-            buttonConfirmGame: ( status === "CONFIRMED" ),
-            gameSuspended: ( status === "SUSPENDED" )
-        });
+            const { confirmedPlayers, status } = game.data;
+            console.log(`****  - confirmedPlayers:  ${ JSON.stringify(confirmedPlayers) }`);
+            
+            const filteredPlayers = players.filter(player => !helper.playerIsIncludeInTheList(player, confirmedPlayers));
+    
+            console.log(`****  - filteredPlayers:  ${ JSON.stringify(filteredPlayers) }`);
+    
+            this.setState({
+                confirmedPlayers: confirmedPlayers,
+                players: filteredPlayers,
+                gameConfirmed: ( status === "CONFIRMED" ),
+                buttonConfirmGame: ( status === "CONFIRMED" ),
+                gameSuspended: ( status === "SUSPENDED" )
+            });
+        }
     }
 
 

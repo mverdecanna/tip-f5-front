@@ -6,6 +6,7 @@ const { host_backend,
         endpoint_updateGamePlayers,
         endpoint_confirmGame,
         endpoint_suspendGame,
+        endpoint_updateDataOfTheGame,
         tokenKey } = require("../config/keys");
 
 
@@ -17,6 +18,8 @@ const { host_backend,
 
         const endpoint = host_backend + endpoint_getGame;
         console.log(`*-*-*-*-*-*  getNextGame   endpoint:  ${endpoint}`);
+        console.log(`*-*-*-*-*-*  getNextGame   group:  ${group}`);
+        console.log(`*-*-*-*-*-*  getNextGame   date:  ${date}`);
 
         const result = await axios.post(endpoint, {   data: {
                                                         group: group,
@@ -38,7 +41,7 @@ const { host_backend,
     const updateGamePlayers = async (group, date, players) => {
         
         const endpoint = host_backend + endpoint_updateGamePlayers;
-        console.log(`*-*-*-*-*-*  getNextGame   endpoint:  ${endpoint}`);
+        console.log(`*-*-*-*-*-*  updateGamePlayers   endpoint:  ${endpoint}`);
 
         const result = await axios.put(endpoint, {   data: {
                                                         group: group,
@@ -96,12 +99,36 @@ const { host_backend,
 
 
 
+    const updateDataOfTheGame = async (group, date, teamA, teamB, result, text) => {
+        
+        const endpoint = host_backend + endpoint_updateDataOfTheGame;
+        console.log(`*-*-*-*-*-*  updateDataOfTheGame   endpoint:  ${endpoint}`);
+
+        const response = await axios.put(endpoint, {   data: {
+                                                        group: group,
+                                                        dayOfTheMatch: date,
+                                                        teamA: teamA,
+                                                        teamB: teamB,
+                                                        result: result,
+                                                        text: text,
+                                                    }
+                                                }, {
+                                                    headers: {
+                                                        'TOKEN': tokenKey,
+                                                        'Content-Type': 'application/json'
+                                                    }
+        });
+        console.log(`******  RESPONSE:  ${JSON.stringify(response)}`);
+    }
+
+
 
     const GameService = {
         getNextGame,
         updateGamePlayers,
         confirmGame,
-        suspendGame
+        suspendGame,
+        updateDataOfTheGame
     };
     
     export default GameService;

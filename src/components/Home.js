@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { render } from '@testing-library/react';
 
 import PlayerList from './PlayerList';
-import MenuBar from './MenuBar';
+import MenuBar from './Menu/MenuBar';
 
 
 
@@ -38,7 +38,7 @@ class Home extends Component {
 
         return(
             <div>
-                <MenuBar userEmail={userEmail} role={role} group={group}/>
+                {/* <MenuBar userEmail={userEmail} role={role} group={group}/> */}
                 <PlayerList userEmail={userEmail} role={role} group={group}/>
             </div>
         );

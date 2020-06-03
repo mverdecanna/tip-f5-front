@@ -3,12 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-import f5_redondo from '../images/logo_redondo.png';
-
+import f5_redondo from '../../images/logo_redondo.png';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -17,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from '@material-ui/core';
 import { NavLink } from 'react-router'
-
+import MenuPannel from './MenuPannel';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +63,11 @@ export default function ButtonAppBar() {
       <AppBar position="static" style={{ background: '#06a73f' }}>
         <Toolbar variant="dense">
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+
+            <MenuPannel />
+
+
+            {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h3" className={classes.title}  >
         

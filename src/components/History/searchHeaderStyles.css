@@ -1,0 +1,67 @@
+.chart__header{
+    margin-bottom: 20px;
+}
+
+.chart__header--container{ 
+    border: 1px solid #e0dfe6;
+    background: #fff; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+    .MuiFormControl-root-60{
+        margin-top: 20px !important;
+        width: 300px !important;
+        margin-left: 0 !important;
+    }
+    #chart__header--button{
+        margin-top: 20px !important;
+        margin-left: 0 !important;
+    }
+}
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 425px) {
+    .chart__header--container{ 
+        width: inherit !important;
+    }
+    .MuiFormControl-root-60{
+        margin-top: 20px !important;
+    }
+    .MuiFormControl-root-60:nth-of-type(1){
+        margin-left: 0 !important;
+    }
+    .MuiFormControl-root-60:nth-of-type(2){
+        margin-left: 25px;
+    }
+    #chart__header--button{
+        margin-left: 0 !important;
+        margin-top: 20px !important;
+    }
+    .MuiFormControl-root-3:nth-of-type(2){
+        margin-left: 8px !important;
+    }
+}
+/* Tablet (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-width : 992px) {
+    .MuiFormControl-root-60:nth-of-type(1){
+        margin-left: 0 !important;
+    }
+    .MuiFormControl-root-60{
+        margin-top: 20px !important;
+    }
+    #chart__header--button{
+        margin-top: 20px !important;
+        margin-left: 185px !important;
+    }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+    .MuiFormControl-root-3:nth-of-type(2){
+        margin-left: 50px !important;
+    }
+}

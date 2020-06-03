@@ -1,0 +1,80 @@
+.nav-side-menu {
+    overflow: auto;
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #2e353d;
+    position: fixed;
+    top: 0px;
+    width: 270px;
+    height: 100%;
+    color: #e1ffff;
+    box-shadow: 0px 0px 15px #2e353d;
+  }
+  .nav-side-menu .brand {
+    line-height: 65px;
+    display: block;
+    text-align: left;
+    font-size: 2rem;
+    height: 65px;
+    font-weight: bold;
+    font-family: 'Indie Flower', cursive;
+  }
+  .nav-side-menu .brand i{
+    margin-left: 27px;
+    font-size: 3rem;
+    position: relative;
+    top: 12px;
+  }
+  .nav-side-menu__logo {
+    position: absolute;
+    bottom: 30px !important;
+    left: 30px !important;
+  }
+  
+  .navbar-box{
+    margin-top: 30px;
+  }
+  
+  .navbar-box li{
+    height: 40px;
+    margin-top: 20px;
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .navbar-box li a{
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+  }
+  .navbar-box li a:hover{
+    color: #05ad37;
+  }
+  .activeLink{
+    color: #05ad37 !important;
+    border: 1px solid #05ad37;
+    border-width: 0 0 2px 0;
+  }
+  
+  .navbar-box li i{
+    margin-right: 20px;
+  }
+
+.cheeseburger-menu-outer{
+  width: 270px !important;
+}
+
+.nav-side-menu__container div:nth-child(2){
+  bottom: 3rem;
+  left: 1rem;
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+  .cheeseburger-menu-outer{
+    width: 0 !important;
+  }
+
+}
