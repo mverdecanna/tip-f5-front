@@ -1,11 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import SaveIcon from '@material-ui/icons/Save';
-import CustomSnackbar from './CustomSnackbar';
-
-import MuiAlert from '@material-ui/lab/Alert';
-
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,28 +13,29 @@ const useStyles = makeStyles((theme) => ({
 export default function IconLabelButtons(props) {
   const classes = useStyles();
 
-    const { validationButton, saveAndOpen, readOnly } = props;
-
+    const { addEmail, invalidEmail } = props;
 
     const handleClick = () => {
 
-      
+      if(!invalidEmail){
 
+        addEmail();
+      }
     }
 
 
   return (
-    <div>
+    <div style={{display: "inline-flex", alignItems: "center", height: "70px"}}>
       <Button
         variant="contained"
         color="primary"
         size="large"
         className={classes.button}
-        startIcon={<SaveIcon />}
-        disabled={!validationButton || readOnly }  // validationButton && !readOnly   ......
-        onClick={ () => saveAndOpen() }
+        startIcon={<PersonAddIcon />}
+        //disabled={!validationButton || readOnly }
+        onClick={ handleClick }
       >
-        Guardar
+        Agregar
       </Button>
 
         {/* <CustomSnackbar typeMessageOK={typeMessageOK} /> */}

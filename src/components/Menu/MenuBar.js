@@ -16,6 +16,7 @@ import { NavLink } from 'react-router'
 import MenuPannel from './MenuPannel';
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,13 +29,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
 
 
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const { logout } = props;
+
+
 
   const handleChange = (event) => {
     //setAuth(event.target.checked);
@@ -46,7 +51,10 @@ export default function ButtonAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+    //alert("hola");
   };
+
+
 
 
 
@@ -104,7 +112,7 @@ export default function ButtonAppBar() {
               >
                 {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                <MenuItem /*onClick={handleClose}*/
+                <MenuItem onClick={logout}
                 component={Link}
                 to="/home"
                 //linkButton={true} href="http://localhost:3001/" 

@@ -5,12 +5,14 @@ import DragAndDropList from './DragAndDropList';
 import CheckboxResult from './CheckboxResult';
 import TextField from './TextField';
 import ButtonWithIcon from './ButtonWithIcon';
+import CustomSnackbar from './CustomSnackbar';
+
 
 
 const FormGame = (props) => {
 
     const { teamA, teamB, passTeamB, passTeamA, setResult, validationButton,
-             result, setText, text, setHasResult, save, readOnly } = props;
+             result, setText, text, setHasResult, save, readOnly, typeMessageOK } = props;
 
     console.log(`**** FormGame teamA:  ${ JSON.stringify(teamA) }`);
 
@@ -60,7 +62,9 @@ const FormGame = (props) => {
 
                     <div>
 
-                        <ButtonWithIcon validationButton={validationButton}  save={save} readOnly={readOnly} />
+                        <CustomSnackbar validationButton={validationButton}  save={save} readOnly={readOnly} typeMessageOK={typeMessageOK} />
+
+                        {/* <ButtonWithIcon validationButton={validationButton}  save={save} readOnly={readOnly} typeMessageOK={typeMessageOK} /> */}
 
                     </div>
 

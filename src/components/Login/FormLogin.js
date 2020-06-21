@@ -12,14 +12,14 @@ const FormLogin = (props) => {
         
         let username = document.getElementById("inputEmail").value;
         let password = document.getElementById("inputPassword").value;
-        let group = document.getElementById("inputGroup").value;
+        //let group = document.getElementById("inputGroup").value;
         
 
         console.log(` ************  username  ${username} `);
         console.log(` ************  password  ${password} `);
-        console.log(` ************  group  ${group} `);
+        //console.log(` ************  group  ${group} `);
                 
-        props.doLogin({ username, password, group });
+        props.doLogin({ username, password });
     };
 
     
@@ -41,9 +41,9 @@ const FormLogin = (props) => {
                         <input type="password" className="form-control" id="inputPassword" placeholder="Contraseña" required="true"/>
                     </div>
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <input type="text" className="form-control" id="inputGroup" placeholder="Grupo" />
-                    </div>
+                    </div> */}
 
                     <div className="forgot">
                             {/* <a href="reset.html">¿Ha olvidado la contraseña?</a> */}

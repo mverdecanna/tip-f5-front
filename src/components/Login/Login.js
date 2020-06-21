@@ -22,10 +22,25 @@ class Login extends Component {
         }
     }
 
-    
-    doLogin = async ({username, password, group}) => {
 
-        console.log(`****  group:  ${ JSON.stringify(group) }`);
+    componentWillMount() {
+
+        const { authOK } = this.props;
+        console.log(`****  Login  componentWillMount  authOK:  ${ JSON.stringify(authOK) }`);
+    
+        if(authOK){
+    
+          //this.props.router.push('/home');
+          this.props.router.push('/group');
+    
+        }
+    }
+
+
+    
+    doLogin = async ({username, password}) => {
+
+        //console.log(`****  group:  ${ JSON.stringify(group) }`);
 
         this.setState({
             loading: true
@@ -33,9 +48,10 @@ class Login extends Component {
 
         if( Helper.validLoginInputs(username, password) ){
 
-            const { authorize, logger, role, grouping } = this.props;
+            //const { authorize, logger, role, grouping } = this.props;
+            const { authorize, logger } = this.props;
     
-            const user = await UserService.loginUser(username, password, group);
+            const user = await UserService.loginUser(username, password);
     
             if( user.email ){
                 console.log(`****  doLogin -->  user:  ${ JSON.stringify(user) }`);
@@ -45,11 +61,13 @@ class Login extends Component {
                 console.log(`****  user.email:  ${ JSON.stringify(user.email) }`);
                 logger(user.email);
     
-                role(user.role);
+                //role(user.role);
 
-                grouping(group);
+                //grouping(group);
     
-                this.props.router.push('/');
+                //this.props.router.push('/');
+                this.props.router.push('/group');
+                
             }else{
                 console.log(`****  user ELSE:  ${ JSON.stringify(user) }`);
                 this.setState({

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import userService from '../services/UserService';
 
 
 class GlobalState extends Component {
@@ -17,6 +17,35 @@ class GlobalState extends Component {
             group: ""
         }
     }
+
+
+    async componentWillMount() {
+
+        await this.evalInit();
+
+    }
+
+
+    evalInit = async () => {
+        const user = await userService.currentUser();
+
+        console.log(`****  GlobalState  componentWillMount  user:  ${ JSON.stringify(user) }`);
+
+        if( user && user.email ){
+
+            this.setState({
+                authOK: true,
+                userEmail: user.email,
+                userRole: user.role,
+                group: user.group
+            });
+        }else{
+            
+            this.props.router.push('/login');
+
+        }
+    }
+
 
 
     userAuthorized = () => {
@@ -51,6 +80,14 @@ class GlobalState extends Component {
     }
 
 
+    closeSession = () => {
+
+        this.setState({
+            authOK: false
+        })
+    }
+
+
 
     render(){
 
@@ -62,7 +99,8 @@ class GlobalState extends Component {
                                                     authorize: this.userAuthorized, 
                                                     logger: this.loggedEmail,
                                                     role: this.loggedUserRole,
-                                                    grouping: this.loggedGroup
+                                                    grouping: this.loggedGroup,
+                                                    logout: this.closeSession
                                                 })
                     }
                 </Fragment>

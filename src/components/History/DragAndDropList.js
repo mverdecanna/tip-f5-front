@@ -169,7 +169,7 @@ class DragAndDropList extends Component {
 }
 
 // Put the thing into the DOM!
-ReactDOM.render(<DragAndDropList />, document.getElementById("root"));
+//ReactDOM.render(<DragAndDropList />, document.getElementById("root"));
 
 
 export default DragAndDropList;

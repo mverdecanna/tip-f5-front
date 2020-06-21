@@ -1,44 +1,40 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import SaveIcon from '@material-ui/icons/Save';
-import CustomSnackbar from './CustomSnackbar';
-
-import MuiAlert from '@material-ui/lab/Alert';
-
+import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+    width: "125px"
   },
 }));
 
 export default function IconLabelButtons(props) {
   const classes = useStyles();
 
-    const { validationButton, saveAndOpen, readOnly } = props;
-
+    const { handlerCancel } = props;
 
     const handleClick = () => {
-
-      
-
+      handlerCancel();
     }
 
 
   return (
+    // <div style={{display: "inline-flex", alignItems: "center", height: "70px"}}>
     <div>
       <Button
         variant="contained"
-        color="primary"
+        color="secondary"
         size="large"
         className={classes.button}
-        startIcon={<SaveIcon />}
-        disabled={!validationButton || readOnly }  // validationButton && !readOnly   ......
-        onClick={ () => saveAndOpen() }
+        startIcon={<CancelIcon />}
+        //disabled={!validationButton || readOnly }
+        onClick={ handleClick }
       >
-        Guardar
+        Cancelar
       </Button>
 
         {/* <CustomSnackbar typeMessageOK={typeMessageOK} /> */}

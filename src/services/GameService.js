@@ -30,7 +30,7 @@ const { host_backend,
                                                         'TOKEN': tokenKey,
                                                         'Content-Type': 'application/json'
                                                     }
-        });
+        }, {withCredentials: true});
         console.log(`******  RESULT:  ${JSON.stringify(result)}`);
         return result.data;
     }
@@ -119,6 +119,7 @@ const { host_backend,
                                                     }
         });
         console.log(`******  RESPONSE:  ${JSON.stringify(response)}`);
+        return response;
     }
 
 

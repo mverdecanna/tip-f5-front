@@ -10,6 +10,7 @@ import FormGame from './FormGame';
 import gameService from '../../services/GameService';
 import helper from '../../util/Helper';
 import ButtonWithIcon from './ButtonWithIcon';
+//import Snackbar from './CustomSnackbar';
 
 
 class SearchHeader extends Component {
@@ -29,6 +30,7 @@ class SearchHeader extends Component {
             text: '',
             activeSave: false,
             readOnly: userRole !== "ADMIN",
+            typeOK: true,
         };
     }
 
@@ -76,6 +78,7 @@ class SearchHeader extends Component {
                 });
 
             }else{
+                console.log(`*-*-*-*  handleSearchedGame  entro al else  game.data :  ${ JSON.stringify(game.data) }`);
 
                 const { confirmedPlayers } = game.data;
     
@@ -85,6 +88,7 @@ class SearchHeader extends Component {
             }
 
         }else{
+            console.log(`*-*-*-*  handleSearchedGame  entro al ELSE game.data :  ${ JSON.stringify(game.data) }`);
 
             if( game && game.data){
 
@@ -96,6 +100,11 @@ class SearchHeader extends Component {
                     result: result,
                     hasResult: true,
                     text: details,
+                });
+            }else{
+
+                this.setState({
+                    text: "NO ORGANIZAMOS PARTIDO PARA ESTA FECHA!!"
                 });
             }
         }
@@ -164,7 +173,7 @@ class SearchHeader extends Component {
         })
     }
     
-    handleButtonSave = () => {
+    handleButtonSave = async () => {
 
         const { group } = this.props;
         const { teamA, teamB, text, result, searchDate } = this.state;
@@ -175,10 +184,23 @@ class SearchHeader extends Component {
         console.log(`**** handleButtonSave  group:  ${ group }`);
         console.log(`**** handleButtonSave  searchDate:  ${ searchDate }`);
 
-        const response = gameService.updateDataOfTheGame(group, searchDate, teamA, teamB, result, text);
-        console.log(`****  response:  ${ response }`);
+        try{
 
-        this.handleChangeActiveSave(false);
+            const response = await gameService.updateDataOfTheGame(group, searchDate, teamA, teamB, result, text);
+            console.log(`**** handleButtonSave response:  ${ JSON.stringify(response) }`);
+
+            if( response && response.status === 200 ){
+
+                this.handleResultUpdate(true);
+                this.handleChangeActiveSave(false);
+            }
+
+        }catch(e){
+            this.handleResultUpdate(false);
+            console.log(`****  update history ERROR:  ${ e }`);
+        }
+        const { activeSave } = this.state;
+        console.log(`*-*-*-*  handleButtonSave  activeSave:  ${ activeSave }`);
     }
 
 
@@ -187,6 +209,19 @@ class SearchHeader extends Component {
         this.setState({
             activeSave: value
         })
+    }
+
+
+    // handleSnackbar = () => {
+    // }
+
+
+    handleResultUpdate = (result) => {
+
+        this.setState({
+            typeOK: result
+        });
+
     }
 
 
@@ -216,12 +251,12 @@ class SearchHeader extends Component {
 
     render() {
 
-        const { teamA, teamB, hasResult, result, text, activeSave, readOnly } = this.state;
+        const { teamA, teamB, hasResult, result, text, activeSave, readOnly, typeOK } = this.state;
 
         return (
 
                 <Container display="flex" >
-                    <div style={{display: "table-cell", justifyContent: "space-between", width: "90%", fontFamily: "fantasy", fontSize: "xx-large"}}>
+                    <div style={{display: "table-cell", justifyContent: "space-between", width: "90%", fontFamily: "monospace", fontSize: "xx-large", backgroundColor: "#e3ffdc"}}>
 
                             <DatePicker setDate={this.handleDateOfTheSearchedGame} />
                     </div>
@@ -237,17 +272,20 @@ class SearchHeader extends Component {
                                 setHasResult={this.handleSetHasResult}
                                 setResult={this.handleSetResult}
                                 setText={this.handleSetText}
-                                validationButton={teamA.length >= 3 && teamB.length >= 3 && hasResult && activeSave}
+                                validationButton={teamA.length >= 5 && teamB.length >= 5 && hasResult && activeSave}
                                 result={result}
                                 text={text}
                                 save={this.handleButtonSave}
                                 readOnly={readOnly}
+                                //resultUpdate={this.handleSnackbar}
+                                typeMessageOK={typeOK}
                                 //cleanCheckbox={this.handleCleanCheckbox}
                             />
 
                         </Grid>
 
                 </Container>
+
         );
     }
 }

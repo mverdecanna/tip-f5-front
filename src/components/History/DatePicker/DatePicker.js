@@ -9,6 +9,7 @@ import {
 
 import moment from 'moment';
 import helper from '../../../util/Helper';
+import EventIcon from '@material-ui/icons/Event';
 
 
 
@@ -34,15 +35,18 @@ export default function MaterialUIPickers(props) {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
         <KeyboardDatePicker
+          keyboardIcon={<EventIcon style={{fontSize: "xx-large", color: "black"}}/>}
           shouldDisableDate={disableDays}
-          //disableToolbar
+          //disableToolbar={true}
           //defaultValue={null}  //{moment().subtract(1, "days")}
           maxDate={moment().subtract(1, "days")}
           variant="inline"
           format="dd/MM/yyyy"
-          margin="normal"
+          inputProps={{fontWeight: "900 !important"}}
+          margin="dense"
           id="date-picker-inline"
-          label="Seleccionar fecha"
+          label={<strong>Seleccionar fecha</strong>}
+          //style={{fontWeight: "bold !important",}}
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{

@@ -6,6 +6,7 @@ import Home from './components/Home';
 import MenuBar from './components/Menu/MenuBar';
 import Login from './components/Login/Login'
 import Loader from './components/Login/Loader';
+import userService from '../src/services/UserService';
 
 
 
@@ -29,11 +30,23 @@ class App extends Component {
     const { authOK } = this.props;
     console.log(`****  App  componentWillMount  authOK:  ${ JSON.stringify(authOK) }`);
 
-    if(!authOK){
+    // if(!authOK){
 
-      this.props.router.push('/login');
+    //   this.props.router.push('/login');
 
-    }
+    // }
+  }
+
+
+
+  handleLogout = async () => {
+
+    const { logout } = this.props;
+
+    logout();
+
+    await userService.logoutUser();
+    this.props.router.push('/login');
   }
 
 
@@ -50,7 +63,7 @@ class App extends Component {
       <div className="App">
 
         <header router={this.props.router}></header>
-        <MenuBar userEmail={userEmail} role={role} group={group}/>
+        <MenuBar userEmail={userEmail} role={role} group={group} logout={this.handleLogout} />
 
         {/* { this.props.children } */}
 

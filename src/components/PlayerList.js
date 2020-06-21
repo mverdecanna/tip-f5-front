@@ -21,7 +21,7 @@ class PlayerList extends Component {
 
     constructor(props){
         super(props);
-        const { role } = this.props;
+        const { role, userRole } = this.props;
         console.log(`**** PlayerList  constructor  role:  ${ role }`);
 
         this.state = {
@@ -32,7 +32,7 @@ class PlayerList extends Component {
             gameSuspended: false,
             tenPlayersConfirmed: false,
             buttonConfirmGame: false,
-            isAdmin: (role === "ADMIN")
+            isAdmin: (userRole === "ADMIN")
         };
 
         // const { userEmail } = this.props;
@@ -46,6 +46,16 @@ class PlayerList extends Component {
         this.handleUpdateClick();
     }
 
+
+    componentDidUpdate(prevProps) {
+
+        console.log(`****  prevProps:  ${ JSON.stringify(prevProps) }`);
+
+        if (this.props.group !== prevProps.group) {
+            this.handleDateOfTheCurrentGame();
+            this.handleUpdateClick();
+        }
+    }
 
     handleDateOfTheCurrentGame = () => {
         const date = helper.getDateOfTheNextGame(2); // 2 = martes
@@ -71,11 +81,12 @@ class PlayerList extends Component {
 
     handleGameInit = async (players) => {
         console.log(`****  - players:  ${ JSON.stringify(players) }`);
-        const { group } = this.props;
+        const { group, userRole } = this.props;
         const { gameDate } = this.state;
 
         const game = await gameService.getNextGame(group, gameDate);
-        console.log(`****  game:  ${ JSON.stringify(game) }`);
+        console.log(`**** handleGameInit  game:  ${ JSON.stringify(game) }`);
+        console.log(`**** handleGameInit  userRole:  ${ JSON.stringify(userRole) }`);
 
         if( game && game.data ){
 
@@ -91,7 +102,8 @@ class PlayerList extends Component {
                 players: filteredPlayers,
                 gameConfirmed: ( status === "CONFIRMED" ),
                 buttonConfirmGame: ( status === "CONFIRMED" ),
-                gameSuspended: ( status === "SUSPENDED" )
+                gameSuspended: ( status === "SUSPENDED" ),
+                isAdmin: (userRole === "ADMIN")
             });
         }
     }
