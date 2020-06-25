@@ -33,5 +33,6 @@ module.exports = {
     endpoint_authorizedGroup: '/authorizedGroup',
     endpoint_validateName: '/validateName',
     endpoint_create: '/create',
+    endpoint_register: '/register',
 
 };

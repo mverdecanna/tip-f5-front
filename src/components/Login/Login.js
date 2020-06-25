@@ -16,6 +16,8 @@ class Login extends Component {
 
         this.doLogin = this.doLogin.bind(this);
 
+        this.doRegistration = this.doRegistration.bind(this);
+
         this.state = {
             loginError: false,
             loading: false
@@ -34,6 +36,13 @@ class Login extends Component {
           this.props.router.push('/group');
     
         }
+    }
+
+
+
+    doRegistration = () => {
+
+        this.props.router.push('/registration');
     }
 
 
@@ -97,7 +106,7 @@ class Login extends Component {
                     <h1 className="form-heading" style={{fontSize: "38px"}}>F5</h1>
                     <img src={f5_redondo}  alt="logo" width="52px" />
                 </div>    
-                    <FormLogin doLogin={this.doLogin} loginError={loginError} loading={loading}></FormLogin>
+                    <FormLogin doLogin={this.doLogin} loginError={loginError} loading={loading} doRegistration={this.doRegistration}></FormLogin>
                    
                 </div> 
             </div>

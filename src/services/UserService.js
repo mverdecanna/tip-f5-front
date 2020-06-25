@@ -4,6 +4,7 @@ const { host_backend,
         endpoint_login,
         endpoint_currentUser,
         endpoint_logout,
+        endpoint_register,
         tokenKey } = require("../config/keys");
 
 
@@ -85,10 +86,41 @@ const { host_backend,
 
 
 
+    const registerUser = async (email, nickname, name, surname, birthday, team, password) => {
+
+        const endpoint = host_backend + endpoint_register;
+
+        const result = await axios.post(endpoint, {   data: {
+                                                        email: email,
+                                                        nickname: nickname,
+                                                        name: name,
+                                                        surname: surname,
+                                                        birthday: birthday,
+                                                        team: team,
+                                                        password: password
+                                                      }
+                                                    }, {
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        }
+                                                    }, {withCredentials: true})
+
+        .catch(function(error){
+            console.log(error);
+        });
+
+        console.log(`***********-- logout RESULT:  ${ JSON.stringify(result) }`);
+
+        return result;
+    }
+
+
+
     const UserService = {
         loginUser,
         currentUser,
-        logoutUser
+        logoutUser,
+        registerUser
     };
     
     export default UserService;

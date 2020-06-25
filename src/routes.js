@@ -8,6 +8,7 @@ import GlobalState from './components/GlobalState';
 import History from './components/History/History';
 import Home from './components/Home';
 import CreateGroup from './components/group/CreateGroup';
+import Registration from './components/Registration/Registration';
 
 
 export default (
@@ -17,6 +18,8 @@ export default (
             <IndexRedirect to="/home"/>
             
             <Route exact path="/login" component={Login}></Route>
+
+            <Route exact path="/registration" component={Registration}></Route>
 
             <Route exact path="/group" component={PostLogin}></Route>
 

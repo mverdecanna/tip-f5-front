@@ -1,0 +1,35 @@
+
+div#RegistrationForm{ 
+    /* background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");  */
+    background-image:url("https://hdwallsource.com/img/2014/9/blurry-35110-35914-hd-wallpapers.jpg");
+    background-repeat:repeat; 
+    background-position:center; 
+    background-size:cover; 
+    padding:10px;
+    min-height: 100vh;
+  }
+  
+  .form-heading { 
+    color:#fff; 
+    font-size:23px;
+  }
+  
+  
+  
+  
+  /* Smartphones (portrait) ----------- */
+  @media only screen and (max-width : 425px) {
+  
+    .main-div{
+        max-width: 100% !important;
+        padding: 50px 50px 70px 50px !important;
+    }
+  }
+  
+  /* Tablet (portrait) ----------- */
+  @media only screen and (min-device-width : 430px) and (max-device-width : 768px) {
+  
+    .main-div{
+        max-width: 58% !important;
+    }
+  }

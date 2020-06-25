@@ -22,6 +22,13 @@ const FormLogin = (props) => {
         props.doLogin({ username, password });
     };
 
+
+    const onClickRegistration = () =>{
+
+        props.doRegistration();
+    }
+
+
     
     return (
         <div className="login-form">
@@ -38,7 +45,7 @@ const FormLogin = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <input type="password" className="form-control" id="inputPassword" placeholder="Contraseña" required="true"/>
+                        <input type="password" className="form-control" id="inputPassword" placeholder="Contraseña" required={true}/>
                     </div>
 
                     {/* <div className="form-group">
@@ -49,9 +56,21 @@ const FormLogin = (props) => {
                             {/* <a href="reset.html">¿Ha olvidado la contraseña?</a> */}
                     </div>
 
-                    <button  type="submit" className="btn btn-primary" onClick={onClickLogin}>Ingresar</button>
-                    
-                    <br></br>
+                    <div>
+
+                        <button  type="submit" className="btn btn-primary" onClick={onClickLogin}>Ingresar</button>
+                    </div>
+
+                    <br/>
+
+
+                    <div>
+
+                        <button  type="submit" className="btn btn-secondary" onClick={onClickRegistration}>Registrarse</button>
+
+                    </div>
+
+
 
                     {
                         loginError ?
