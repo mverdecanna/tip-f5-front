@@ -21,12 +21,17 @@ class PlayerList extends Component {
 
     constructor(props){
         super(props);
-        const { role, userRole } = this.props;
-        console.log(`**** PlayerList  constructor  role:  ${ role }`);
+        const { role, userRole, day, getGlobalDay } = this.props;
+        console.log(`**** PlayerList  constructor  role:  ${ userRole }`);
+        console.log(`**** PlayerList  constructor  day:  ${ day }`);
+        
+        var getDay = getGlobalDay();
+        console.log(`**** PlayerList  constructor  getDay:  ${ getDay }`);
 
         this.state = {
             players: [],
             confirmedPlayers: [],
+            gameDay: null,
             gameDate: null,
             gameConfirmed: false,
             gameSuspended: false,
@@ -36,8 +41,8 @@ class PlayerList extends Component {
         };
 
         // const { userEmail } = this.props;
-        console.log(`****  PlayerList  constructor  isAdmin:  ${ JSON.stringify(this.state.isAdmin) }`);
-        console.log("constructor");
+        //console.log(`****  PlayerList  constructor  isAdmin:  ${ JSON.stringify(this.state.isAdmin) }`);
+        //console.log("constructor");
     }
 
 
@@ -58,10 +63,18 @@ class PlayerList extends Component {
     }
 
     handleDateOfTheCurrentGame = () => {
-        const date = helper.getDateOfTheNextGame(2); // 2 = martes
+
+        const { day, getGlobalDay } = this.props;
+        console.log(`**** PlayerList  handleDateOfTheCurrentGame  day:  ${ day }`);
+
+//       const getDay = getGlobalDay();
+//        console.log(`**** PlayerList  handleDateOfTheCurrentGame  getDay:  ${ getDay }`);
+
+        const date = helper.getDateOfTheNextGame(day); // 2 = martes
 
         this.setState({
-            gameDate: date
+            gameDate: date,
+            gameDay: day
         });
     }
 
@@ -82,6 +95,9 @@ class PlayerList extends Component {
     handleGameInit = async (players) => {
         console.log(`****  - players:  ${ JSON.stringify(players) }`);
         const { group, userRole } = this.props;
+        console.log(`**** handleGameInit  group:  ${ JSON.stringify(group) }`);
+        console.log(`**** handleGameInit  userRole:  ${ JSON.stringify(userRole) }`);
+
         const { gameDate } = this.state;
 
         const game = await gameService.getNextGame(group, gameDate);

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import userService from '../services/UserService';
+import groupService from '../services/GroupService';
 
 
 class GlobalState extends Component {
@@ -14,7 +15,8 @@ class GlobalState extends Component {
             authOK: false,
             userEmail: "",
             userRole: "",
-            group: ""
+            group: "",
+            day: null
         }
     }
 
@@ -27,17 +29,21 @@ class GlobalState extends Component {
 
 
     evalInit = async () => {
+
         const user = await userService.currentUser();
+        console.log(`****  GlobalState  evalInit  user:  ${ JSON.stringify(user) }`);
 
-        console.log(`****  GlobalState  componentWillMount  user:  ${ JSON.stringify(user) }`);
+        if( user && user.email && user.groupId ){
 
-        if( user && user.email ){
+            const group = await groupService.currentGroup(user.groupId, user.email);
+            console.log(`****  GlobalState  evalInit  group:  ${ JSON.stringify(group) }`);
 
             this.setState({
                 authOK: true,
                 userEmail: user.email,
-                userRole: user.role,
-                group: user.group
+                userRole: group.role,
+                group: group.groupId,
+                day: group.day
             });
         }else{
             
@@ -88,6 +94,15 @@ class GlobalState extends Component {
     }
 
 
+    getGlobalDay = () => {
+
+        const { day } = this.state;
+        console.log(`****  GlobalState  getGlobalDay  day:  ${ day }`);
+
+        return day;
+    }
+
+
 
     render(){
 
@@ -100,7 +115,8 @@ class GlobalState extends Component {
                                                     logger: this.loggedEmail,
                                                     role: this.loggedUserRole,
                                                     grouping: this.loggedGroup,
-                                                    logout: this.closeSession
+                                                    logout: this.closeSession,
+                                                    getGlobalDay: this.getGlobalDay
                                                 })
                     }
                 </Fragment>

@@ -22,5 +22,6 @@ module.exports = {
     endpoint_validateName: '/validateName',
     endpoint_create: '/create',
     endpoint_register: '/register',
+    endpoint_currentGroup: '/currentGroup',
     
 };

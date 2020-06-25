@@ -17,8 +17,10 @@ import moment from 'moment';
 
     const getDateOfTheNextGame = (dayOfWeek) => {
 
-        const theDayInThisWeek = moment().day(dayOfWeek).startOf('day');
-        const nextDate = moment().day(dayOfWeek + 7).startOf('day');
+        const dayInt = parseInt(dayOfWeek);
+
+        const theDayInThisWeek = moment().day(dayInt).startOf('day');
+        const nextDate = moment().day(dayInt + 7).startOf('day');
         const today = moment().startOf('day');
         
         const result = ( theDayInThisWeek.isSameOrAfter(today) ) ? theDayInThisWeek : nextDate;

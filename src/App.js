@@ -53,11 +53,12 @@ class App extends Component {
 
   render(){
 
-    const { userEmail, userRole, role, group } = this.props;
+    const { userEmail, userRole, role, group, day, getGlobalDay } = this.props;
     console.log(`****  App  render  userEmail:  ${ JSON.stringify(userEmail) }`);
     console.log(`****  App  render  group:  ${ JSON.stringify(group) }`);
     console.log(`****  App  render  userRole:  ${ JSON.stringify(userRole) }`);
     console.log(`****  App  render  role:  ${ JSON.stringify(role) }`);
+    console.log(`****  App  render  day:  ${ JSON.stringify(day) }`);
 
     return(
       <div className="App">
@@ -74,7 +75,9 @@ class App extends Component {
                                                   userEmail: userEmail, 
                                                     role: role,
                                                     group: group,
-                                                    userRole: userRole
+                                                    userRole: userRole,
+                                                    day: day,
+                                                    getGlobalDay: getGlobalDay,
                                                 })
                     }
 

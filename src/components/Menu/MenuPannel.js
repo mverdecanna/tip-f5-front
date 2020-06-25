@@ -74,14 +74,14 @@ export default function TemporaryDrawer() {
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 
           <li className="nav-item active" >
-            <Link activeClassName="activeLink" to="/" className="nav-link">
-                <i className="fas fa-chart-line"></i>Principal
+            <Link activeClassName="activeLink" to="/game" className="nav-link">
+                <i className="far fa-futbol"></i>Principal
             </Link>
           </li>
 
           <li className="nav-item" >
             <Link activeClassName="activeLink" to="/history" className="nav-link">
-                <i className="fas fa-comments"></i>Historial
+                <i className="far fa-calendar-alt"></i>Historial
             </Link>
           </li>
 
@@ -89,7 +89,17 @@ export default function TemporaryDrawer() {
             <Link activeClassName="activeLink" to="/" className="nav-link">
                 <i className="fas fa-comments"></i>Mis Partidos
             </Link>
-          </li> */}
+          </li> 
+
+          far fa-hdd
+          fas fa-database
+          far fa-calendar-check
+          far fa-calendar-alt
+          far fa-clipboard
+          fas fa-futbol
+          far fa-futbol	
+          
+          */}
           
       </ul>
   </div>   

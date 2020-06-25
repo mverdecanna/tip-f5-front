@@ -4,6 +4,7 @@ import axios from 'axios';
 const { host_backend, 
         endpoint_authorizedGroup,
         endpoint_validateName,
+        endpoint_currentGroup,
         endpoint_create } = require("../config/keys");
 
 
@@ -95,14 +96,49 @@ const { host_backend,
     }
 
 
-// groupId, day, admin, inviteds
 
 
-    const GroupService = {
-        authorizedGroup,
-        validateName,
-        create,
-    };
+    const currentGroup = async (groupId, email) => {
+
+        console.log(`****** currentGroup  groupId:  ${ groupId }`);
+
+        var group = {};
+
+        const endpoint = host_backend + endpoint_currentGroup;
+
+        const response = await axios.post(endpoint, {   data: {
+                                                            groupId: groupId,
+                                                            email: email,
+                                                        }
+                                                     }, {
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        }
+        }, {withCredentials: true})
+
+        .catch(function(error){
+            console.log(error);
+        });
+
+        console.log(`****** service currentGroup  RESPONSE:  ${JSON.stringify(response)}`);
+
+        if(response){
+
+            group = response.data;
+        }
+
+        return group;
+    }
+
+
+
+
+const GroupService = {
+    authorizedGroup,
+    validateName,
+    create,
+    currentGroup,
+};
 
 
 export default GroupService;
