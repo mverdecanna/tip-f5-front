@@ -103,6 +103,13 @@ class GlobalState extends Component {
     }
 
 
+    setGlobalDay = (day) => {
+
+        this.setState({
+            day: day
+        });
+    }
+
 
     render(){
 
@@ -116,7 +123,8 @@ class GlobalState extends Component {
                                                     role: this.loggedUserRole,
                                                     grouping: this.loggedGroup,
                                                     logout: this.closeSession,
-                                                    getGlobalDay: this.getGlobalDay
+                                                    getGlobalDay: this.getGlobalDay,
+                                                    setGlobalDay: this.setGlobalDay
                                                 })
                     }
                 </Fragment>

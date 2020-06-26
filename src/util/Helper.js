@@ -17,6 +17,8 @@ import moment from 'moment';
 
     const getDateOfTheNextGame = (dayOfWeek) => {
 
+        console.log(`*-*-*-*-*-*-*-*-*-*   getDateOfTheNextGame  RESULT: ${JSON.stringify(dayOfWeek)}`);
+
         const dayInt = parseInt(dayOfWeek);
 
         const theDayInThisWeek = moment().day(dayInt).startOf('day');

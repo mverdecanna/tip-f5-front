@@ -62,6 +62,7 @@ class PlayerList extends Component {
         }
     }
 
+
     handleDateOfTheCurrentGame = () => {
 
         const { day, getGlobalDay } = this.props;
@@ -99,6 +100,7 @@ class PlayerList extends Component {
         console.log(`**** handleGameInit  userRole:  ${ JSON.stringify(userRole) }`);
 
         const { gameDate } = this.state;
+        console.log(`**** handleGameInit  gameDate:  ${ JSON.stringify(gameDate) }`);
 
         const game = await gameService.getNextGame(group, gameDate);
         console.log(`**** handleGameInit  game:  ${ JSON.stringify(game) }`);
@@ -192,24 +194,36 @@ class PlayerList extends Component {
     
     
     handleConfirmGame = () => {
-        this.setState({
-            gameConfirmed: true
-        })
-        const { group } = this.props;
-        const { gameDate } = this.state;
-        const result = gameService.confirmGame(group, gameDate);
-        console.log(`****  handleConfirmGame  result:  ${ result }`);
+
+        const { gameConfirmed } = this.state;
+
+        if(!gameConfirmed){
+
+            this.setState({
+                gameConfirmed: true
+            })
+            const { group } = this.props;
+            const { gameDate } = this.state;
+            const result = gameService.confirmGame(group, gameDate);
+            console.log(`****  handleConfirmGame  result:  ${ result }`);
+        }
     }
 
 
     handleSuspendGame = () => {
-        this.setState({
-            gameSuspended: true
-        })
-        const { group } = this.props;
-        const { gameDate } = this.state;
-        const result = gameService.suspendGame(group, gameDate);
-        console.log(`****  handleSuspendGame  result:  ${ result }`);
+
+        const { gameSuspended } = this.state;
+
+        if(!gameSuspended){
+
+            this.setState({
+                gameSuspended: true
+            })
+            const { group } = this.props;
+            const { gameDate } = this.state;
+            const result = gameService.suspendGame(group, gameDate);
+            console.log(`****  handleSuspendGame  result:  ${ result }`);
+        }
     }
 
 
@@ -264,7 +278,7 @@ class PlayerList extends Component {
                     <br/><br/>
 
                         {
-                            players.length === 0 
+                            players.length === 0 && confirmedPlayers === 0
                                 ? <strong>No hay jugadores disponibles por el momento</strong> 
                                 : 
                                 <Container>
@@ -309,7 +323,7 @@ class PlayerList extends Component {
 
                 <div>
                         {
-                            players.length > 0
+                            players.length > 0  //players.length === 0 && confirmedPlayers === 0    
                                 ?  <br/>
                                 :  <button style={{backgroundColor: "red", width: "100px", padding: "15", borderColor: "black"}} onClick={this.handleUpdateClick}>Actualizar</button>
                         

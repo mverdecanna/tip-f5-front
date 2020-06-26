@@ -61,7 +61,7 @@ class PostLogin extends Component {
 
         if( groupId && userEmail ){
 
-            const { role, grouping } = this.props;
+            const { role, grouping, setGlobalDay } = this.props;
     
             const group = await GroupService.authorizedGroup(userEmail, groupId);
             console.log(`****  doLoginGroup  =>  group:  ${ JSON.stringify(group) }`);
@@ -74,6 +74,8 @@ class PostLogin extends Component {
                 role(group.data.role);
 
                 grouping(group.data.groupId);
+
+                setGlobalDay(group.data.day);
     
                 this.props.router.push('/');
             }else{

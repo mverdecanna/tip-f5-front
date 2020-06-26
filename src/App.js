@@ -30,11 +30,11 @@ class App extends Component {
     const { authOK } = this.props;
     console.log(`****  App  componentWillMount  authOK:  ${ JSON.stringify(authOK) }`);
 
-    // if(!authOK){
+    if(!authOK){
 
-    //   this.props.router.push('/login');
+      this.props.router.push('/login');
 
-    // }
+    }
   }
 
 
@@ -53,7 +53,7 @@ class App extends Component {
 
   render(){
 
-    const { userEmail, userRole, role, group, day, getGlobalDay } = this.props;
+    const { userEmail, userRole, role, group, day, getGlobalDay, setGlobalDay } = this.props;
     console.log(`****  App  render  userEmail:  ${ JSON.stringify(userEmail) }`);
     console.log(`****  App  render  group:  ${ JSON.stringify(group) }`);
     console.log(`****  App  render  userRole:  ${ JSON.stringify(userRole) }`);
@@ -78,6 +78,7 @@ class App extends Component {
                                                     userRole: userRole,
                                                     day: day,
                                                     getGlobalDay: getGlobalDay,
+                                                    setGlobalDay: setGlobalDay,
                                                 })
                     }
 

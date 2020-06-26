@@ -1,15 +1,25 @@
 import React from 'react';
+import {Router} from 'react-router';
 //import { render } from '@testing-library/react';
-import App from './';
+import App from './App';
 import Login from '../src/components/Login/Login';
+import MenuBar from '../src/components/Menu/MenuBar';
 import Effect from '../src/components/Login/Effect';
-import { shallow, render } from 'enzyme';
+import { shallow, render, mount } from 'enzyme';
 
 
 
-test('renders learn react link', () => {
+describe('renders learn react link', () => {
 
-  render(<App />)
+  it('should render correctly', () => {
+
+    const wrapper = shallow(<App authOK={true} router={[]} userEmail={""} userRole={""} role={""} group={""} day={""} getGlobalDay={""} setGlobalDay={""} children={<div/>}/>);
+
+    expect(wrapper.find(MenuBar)).toHaveLength(1);
+
+  })
+
+  //render(<App />)
 
   // const { getByText } = render(<App />);
   // const linkElement = getByText(/learn react/i);

@@ -39,6 +39,20 @@ class Login extends Component {
     }
 
 
+    componentDidUpdate(){
+
+        const { authOK } = this.props;
+        console.log(`****  Login  componentWillMount  authOK:  ${ JSON.stringify(authOK) }`);
+    
+        if(authOK){
+    
+          this.props.router.push('/home');
+          //this.props.router.push('/group');
+    
+        }
+    }
+
+
 
     doRegistration = () => {
 

@@ -31,7 +31,7 @@ class Home extends Component {
     render(){
         console.log("render");
         //const { players, confirmedPlayers } = this.state;
-        const { userEmail, role, group, userRole, day, getGlobalDay } = this.props;
+        const { userEmail, role, group, userRole, day, getGlobalDay, setGlobalDay } = this.props;
         console.log(`****  Home  render  userEmail:  ${ JSON.stringify(userEmail) }`);
         console.log(`****  Home  render  role:  ${ JSON.stringify(role) }`);
         console.log(`****  Home  render  group:  ${ JSON.stringify(group) }`);
@@ -39,7 +39,7 @@ class Home extends Component {
         return(
             <div>
                 {/* <MenuBar userEmail={userEmail} role={role} group={group}/> */}
-                <PlayerList userEmail={userEmail} role={role} group={group} userRole={userRole} day={day} getGlobalDay={getGlobalDay} />
+                <PlayerList userEmail={userEmail} role={role} group={group} userRole={userRole} day={day} getGlobalDay={getGlobalDay} setGlobalDay={setGlobalDay}/>
             </div>
         );
 
