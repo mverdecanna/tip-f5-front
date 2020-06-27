@@ -19,7 +19,10 @@ class SearchHeader extends Component {
     constructor(props){
         super(props);
         
-        const { userRole } = this.props;
+        const { userRole, creationDate, day } = this.props;
+
+        console.log(`**** SearchHeader  constructor  creationDate:  ${ creationDate }`);
+        console.log(`**** SearchHeader  constructor  day:  ${ day }`);
 
         this.state = {
             searchDate: null,
@@ -31,6 +34,8 @@ class SearchHeader extends Component {
             activeSave: false,
             readOnly: userRole !== "ADMIN",
             typeOK: true,
+            older: creationDate,
+            dayWeek: day,
         };
     }
 
@@ -84,6 +89,7 @@ class SearchHeader extends Component {
     
                 this.setState({
                     teamA: confirmedPlayers,
+                    text: confirmedPlayers.length < 6 ? "DESORGANIZACION TOTAL! SE SUSPENDIO!" : "",
                 });
             }
 
@@ -251,14 +257,14 @@ class SearchHeader extends Component {
 
     render() {
 
-        const { teamA, teamB, hasResult, result, text, activeSave, readOnly, typeOK } = this.state;
+        const { teamA, teamB, hasResult, result, text, activeSave, readOnly, typeOK, older, dayWeek } = this.state;
 
         return (
 
                 <Container display="flex" >
                     <div style={{display: "table-cell", justifyContent: "space-between", width: "90%", fontFamily: "monospace", fontSize: "xx-large", backgroundColor: "#e3ffdc"}}>
 
-                            <DatePicker setDate={this.handleDateOfTheSearchedGame} />
+                            <DatePicker setDate={this.handleDateOfTheSearchedGame} older={older} dayWeek={dayWeek}/>
                     </div>
 
                         {/* <Grid container xs={12} md={6}> */}

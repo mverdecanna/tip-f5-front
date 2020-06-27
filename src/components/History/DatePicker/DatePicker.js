@@ -16,7 +16,10 @@ import EventIcon from '@material-ui/icons/Event';
 export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
 
-  const { setDate } = props;
+  const { setDate, older, dayWeek } = props;
+
+  console.log(`**** datePicker older:  ${ JSON.stringify(older) }`);
+  console.log(`**** datePicker dayWeek:  ${ JSON.stringify(dayWeek) }`);
 
   const datePreviousGame = helper.getDateOfThePreviousGame(2);
 
@@ -28,7 +31,7 @@ export default function MaterialUIPickers(props) {
   };
 
   function disableDays(date) {
-    return date.getDay() !== 2;
+    return date.getDay() !== dayWeek;
   }
 
   return (
@@ -40,6 +43,7 @@ export default function MaterialUIPickers(props) {
           //disableToolbar={true}
           //defaultValue={null}  //{moment().subtract(1, "days")}
           maxDate={moment().subtract(1, "days")}
+          minDate={older}
           variant="inline"
           format="dd/MM/yyyy"
           inputProps={{fontWeight: "900 !important"}}

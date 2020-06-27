@@ -21,11 +21,11 @@ class Registration extends Component {
             registrationSurname: "",
             registrationPassword: "",
             registrationBirthday: null,
-            registrationTeam: "",
-            registrationOK: true,
+            registrationTeam: null,
+            registrationOK: null,
             invalidEmail: true,
             invalidPassword: true,
-            errorMessage: "Registración exitosa!",
+            errorMessage: "...",
         }
     }
     
@@ -199,6 +199,7 @@ class Registration extends Component {
             if( response && response.status === 200 ){
                 console.log(`*-*-*-*-*-*-*-*  registrate  entro al IF  :  ${ JSON.stringify(response) }`);
 
+                this.setRegistrationOK(true);
                 
                 this.setErrorMessage("Registración exitosa!");
 
@@ -209,13 +210,15 @@ class Registration extends Component {
 
                     }
                     .bind(this), 
-                    2000
+                    3000
                 );
+
+                //this.forwardToLoginPage();
 
             }else{
     
                 this.setRegistrationOK(false);
-                this.setErrorMessage("error 1");
+                this.setErrorMessage("Error al intentar registrarte");
             }
             
         }catch(e){

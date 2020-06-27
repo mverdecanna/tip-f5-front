@@ -15,21 +15,32 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
-    width: "125px"
+    width: "126px"
   },
 }));
 
 export default function IconLabelButtons(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [control, setControl] = React.useState(false);
 
     const { readyToRegistration, registrationOK, onClickRegistration, errorMessage } = props;
 
 
+
     const handleClick = () => {
 
+      setControl(true);
+
       onClickRegistration();
-      setOpen(true);
+
+      setTimeout(function() {
+            
+        setOpen(true);
+
+      }, 1000);
+      
+      setControl(false);
     }
 
 
@@ -51,10 +62,10 @@ export default function IconLabelButtons(props) {
         size="large"
         className={classes.button}
         startIcon={<CheckCircleIcon fontSize="large" />}
-        disabled={ !readyToRegistration }
+        disabled={ !readyToRegistration && !control }
         onClick={ handleClick }
       >
-        Crear
+        Registrar
       </Button>
 
 

@@ -16,7 +16,8 @@ class GlobalState extends Component {
             userEmail: "",
             userRole: "",
             group: "",
-            day: null
+            day: null,
+            creationDate: null,
         }
     }
 
@@ -43,7 +44,8 @@ class GlobalState extends Component {
                 userEmail: user.email,
                 userRole: group.role,
                 group: group.groupId,
-                day: group.day
+                day: group.day,
+                creationDate: group.creationDate,
             });
         }else{
             
@@ -111,6 +113,24 @@ class GlobalState extends Component {
     }
 
 
+    getCreationDate = () => {
+
+        const { creationDate } = this.state;
+        console.log(`****  GlobalState  getCreationDate  creationDate:  ${ creationDate }`);
+
+        return creationDate;
+    }
+
+
+    setCreationDate = (date) => {
+
+        this.setState({
+            creationDate: date
+        });
+    }
+
+
+
     render(){
 
         return(
@@ -124,7 +144,9 @@ class GlobalState extends Component {
                                                     grouping: this.loggedGroup,
                                                     logout: this.closeSession,
                                                     getGlobalDay: this.getGlobalDay,
-                                                    setGlobalDay: this.setGlobalDay
+                                                    setGlobalDay: this.setGlobalDay,
+                                                    getCreationDate: this.getCreationDate,
+                                                    setCreationDate: this.setCreationDate
                                                 })
                     }
                 </Fragment>

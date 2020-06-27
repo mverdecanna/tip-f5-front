@@ -132,7 +132,7 @@ const FormRegistration = (props) => {
                     <br/>
                     <br/>
 
-                    <div>
+                    <div >
 
                         <InputFootballTeam handlerRegistrationTeam={handlerRegistrationTeam} />
 

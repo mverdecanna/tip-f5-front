@@ -19,7 +19,7 @@ class CreateGroup extends Component {
         //this.doCreateGroup = this.doCreateGroup.bind(this);
 
         this.state = {
-            invalidName: true,
+            invalidName: false,
             groupName: "",
             inputEmail: "",
             invalidEmail: true,

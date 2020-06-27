@@ -31,7 +31,7 @@ export default function ValidationTextFieldNickname(props) {
       <div>
         <TextField
           //error={invalidEmail && inputEmail !== ""}
-          id="outlined-error-helper-text"
+          id="outlined-error-helper-nickname"
           label="Nickname"
           //defaultValue=""
           helperText="Ingresa tu apodo"

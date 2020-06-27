@@ -21,7 +21,9 @@ class History extends Component {
 
     render() {
 
-        const { group, role, userRole } = this.props;
+        const { group, role, userRole, creationDate, day } = this.props;
+
+        console.log(`****  History  render  creationDate:  ${ JSON.stringify(creationDate) }`);
 
         return (
 
@@ -29,7 +31,7 @@ class History extends Component {
                 <Container>
                     {/* <Row>
                       <Col sm={{ size: 12 }}> */}
-                        <SearchHeader group={group} role={role} userRole={userRole} ></SearchHeader>
+                        <SearchHeader group={group} role={role} userRole={userRole} creationDate={creationDate} day={day} ></SearchHeader>
                       {/* </Col>
                     </Row> */}
   
