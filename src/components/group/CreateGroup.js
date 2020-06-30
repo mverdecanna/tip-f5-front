@@ -25,7 +25,7 @@ class CreateGroup extends Component {
             invalidEmail: true,
             emailList: [],
             daySelected: "",
-            createOK: true,
+            createOK: null,
             //readyToCreate: false
             //loginGroupError: false,
             //loadingGroup: false
@@ -181,7 +181,19 @@ class CreateGroup extends Component {
             if( response && response.status === 200 ){
                 console.log(`*-*-*-*-*-*-*-*  createGroup  entro al IF  :  ${ JSON.stringify(response) }`);
     
-                this.props.router.push('/login');
+                this.setCreateOK(true);
+
+                setTimeout(
+                    function() {
+
+                        this.forwardToLoginPage();
+
+                    }
+                    .bind(this), 
+                    3000
+                );
+
+                //this.props.router.push('/login');
 
             }else{
     
@@ -193,6 +205,16 @@ class CreateGroup extends Component {
             this.setCreateOK(false);
             console.log(`*******   create   ERROR:  ${ e }`);
         }
+    }
+
+
+    forwardToLoginPage = async () => {
+
+        this.props.router.push('/login');
+
+        this.setState({
+            invalidName: true,
+        });
     }
 
 

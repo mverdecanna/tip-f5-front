@@ -39,8 +39,15 @@ import moment from 'moment';
         
         const result = ( theDayInThisWeek.isBefore(today) ) ? theDayInThisWeek : previousDate;
         console.log(`*-*-*-*-*-*-*-*-*-*   getDateOfThePreviousGame  RESULT: ${JSON.stringify(result)}`);
+        //console.log(`*-*-*-*-*-*-*-*-*-*   getDateOfThePreviousGame  CUENTA: ${JSON.stringify(  today.subtract(7) <  previousDate )}`);
         return result;
     }
+
+
+    // const creationIsBeforeFirstGame = (dayOfWeek, creationDate) => {
+
+
+    // }
 
 
 

@@ -22,14 +22,25 @@ const useStyles = makeStyles((theme) => ({
 export default function IconLabelButtons(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [control, setControl] = React.useState(false);
+
 
     const { readyToCreate, createOK, onClickCreateGroup } = props;
 
 
     const handleClick = () => {
 
+      setControl(true);
+
       onClickCreateGroup();
-      setOpen(true);
+
+      setTimeout(function() {
+            
+        setOpen(true);
+
+      }, 2000);
+
+      setControl(false);
     }
 
 
@@ -51,7 +62,7 @@ export default function IconLabelButtons(props) {
         size="large"
         className={classes.button}
         startIcon={<CheckCircleIcon fontSize="large" />}
-        disabled={ !readyToCreate }
+        disabled={ !readyToCreate && !control }
         onClick={ handleClick }
       >
         Crear
@@ -62,11 +73,13 @@ export default function IconLabelButtons(props) {
 
         {
           createOK ? 
-                          <p></p>
-                        :
-                          <Alert onClose={handleClose} severity="error">
-                            No se pudo crear en este momento!
-                          </Alert>
+                      <Alert onClose={handleClose} severity="success">
+                        Grupo Creado!
+                      </Alert>
+                    :
+                      <Alert onClose={handleClose} severity="error">
+                        No se pudo crear en este momento!
+                      </Alert>
         }
 
       </Snackbar>

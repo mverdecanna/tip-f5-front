@@ -21,7 +21,7 @@ export default function MaterialUIPickers(props) {
   console.log(`**** datePicker older:  ${ JSON.stringify(older) }`);
   console.log(`**** datePicker dayWeek:  ${ JSON.stringify(dayWeek) }`);
 
-  const datePreviousGame = helper.getDateOfThePreviousGame(2);
+  const datePreviousGame = helper.getDateOfThePreviousGame(dayWeek);
 
   const [selectedDate, setSelectedDate] = React.useState(datePreviousGame);
 
@@ -38,6 +38,8 @@ export default function MaterialUIPickers(props) {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify="space-around">
         <KeyboardDatePicker
+
+          //disabled={ true}//older > helper.getDateOfThePreviousGame(dayWeek) }
           keyboardIcon={<EventIcon style={{fontSize: "xx-large", color: "black"}}/>}
           shouldDisableDate={disableDays}
           //disableToolbar={true}

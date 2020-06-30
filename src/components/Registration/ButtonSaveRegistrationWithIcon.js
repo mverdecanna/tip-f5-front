@@ -38,7 +38,7 @@ export default function IconLabelButtons(props) {
             
         setOpen(true);
 
-      }, 1000);
+      }, 2000);
       
       setControl(false);
     }

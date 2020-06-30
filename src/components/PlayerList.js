@@ -323,7 +323,7 @@ class PlayerList extends Component {
 
                 <div>
                         {
-                            players.length > 0  //players.length === 0 && confirmedPlayers === 0    
+                            players.length > 0 || confirmedPlayers.length > 0   //players.length === 0 && confirmedPlayers === 0    
                                 ?  <br/>
                                 :  <button style={{backgroundColor: "red", width: "100px", padding: "15", borderColor: "black"}} onClick={this.handleUpdateClick}>Actualizar</button>
                         
