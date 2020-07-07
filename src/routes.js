@@ -35,7 +35,14 @@ export default (
 
 
             </Route>
+
             
+        </Route>
+        
+        <Route  path="*" >
+
+            <IndexRedirect to="/login"/>
+
         </Route>
 
     </div>

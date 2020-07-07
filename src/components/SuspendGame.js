@@ -11,6 +11,8 @@ import SportsSoccerIcon from '@material-ui/icons/SportsSoccer';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import ReportIcon from '@material-ui/icons/Report';
+import helper from '../util/Helper';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CircularIntegration(props) {
 
-  const { suspend, effect, statusSuspended } = props;
+  const { suspend, effect, statusSuspended, dateToButton} = props;
+
 
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
@@ -77,8 +80,11 @@ export default function CircularIntegration(props) {
     }
   };
 
+
+
   return (
     <div className={classes.root}>
+      
       <div className={classes.wrapper}>
         <Fab
           aria-label="save"
@@ -90,6 +96,7 @@ export default function CircularIntegration(props) {
           { ( success || statusSuspended ) ? <ReportIcon /> : <ReportProblemIcon /> }
         </Fab>
         {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+     
       </div>
       <div className={classes.wrapper}>
         <Button
@@ -103,6 +110,7 @@ export default function CircularIntegration(props) {
           { ( success || statusSuspended ) ? "Partido Suspendido" : "Suspender Partido" }
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+  {/* <h6>{dateToButton}</h6> */}
       </div>
     </div>
   );

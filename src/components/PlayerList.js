@@ -11,6 +11,8 @@ import UIfx from 'uifx';
 import whistle from '../sounds/Whistle-noise.mp3';
 import boo from '../sounds/boo.mp3';
 import helper from '../util/Helper';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 
 //import { delay } from 'q';
 
@@ -247,13 +249,23 @@ class PlayerList extends Component {
     }
 
 
+    handleDate = () => {
+        const { gameDate } = this.state;
+
+        console.log(`****  handleDate  gameDate:  ${ gameDate }`);
+        return gameDate;
+    }
+
 
  
     render(){
         console.log("render");
-        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame, isAdmin, gameConfirmed, gameSuspended } = this.state;
-        const { userEmail } = this.props;
+        const { players, confirmedPlayers, tenPlayersConfirmed, buttonConfirmGame, isAdmin, gameConfirmed, gameSuspended, gameDate } = this.state;
+        const { userEmail, day } = this.props;
        // console.log(`****  PlayerList  render  userEmail:  ${ JSON.stringify(userEmail) }`);
+       const dateToButton = ":     " + helper.formatDateToFront(gameDate);//toISOString();//(gameDate);
+       console.log(`****  render  dateToButton:  ${ dateToButton }`);
+
         return(
             <div className="App">
                     <audio id="audio_whistle" ><source src={whistle} type="audio/mp3" ></source></audio>
@@ -261,17 +273,21 @@ class PlayerList extends Component {
 
                     <div style={{display: "inline-flex", justifyContent: "space-between", width: "90%", fontFamily: "fantasy", fontSize: "xx-large"}}>
                         <h1>JUGADORES DISPONIBLES</h1>
-                            
+                        <div>
                             {
                                 buttonConfirmGame ? <ConfirmGame confirm={this.handleConfirmGame}
                                                                  effect={this.effectWhistle} 
-                                                                 statusConfirmed={gameConfirmed} /> 
+                                                                 statusConfirmed={gameConfirmed} 
+                                                                 dateToButton={dateToButton} /> 
 
                                                   : <SuspendGame suspend={this.handleSuspendGame}
                                                                  effect={this.effectBoo}
-                                                                 statusSuspended={gameSuspended} />
+                                                                 statusSuspended={gameSuspended} 
+                                                                 dateToButton={dateToButton} /> 
                             }
-                            
+
+                        { true ? <FormHelperText style={{display: "inline-flex", color: "black", textDecorationLine: "underline", fontSize: "x-large", fontFamily: "fantasy", width: "max-content"}}><strong> FECHA{dateToButton} </strong></FormHelperText> : ""}
+                        </div>
                         <h1>JUGADORES CONFIRMADOS</h1>
                     </div>
                     
@@ -323,7 +339,7 @@ class PlayerList extends Component {
 
                 <div>
                         {
-                            players.length > 0 || confirmedPlayers.length > 0   //players.length === 0 && confirmedPlayers === 0    
+                            players.length > 0 || confirmedPlayers.length > 0    //players.length === 0 && confirmedPlayers === 0    
                                 ?  <br/>
                                 :  <button style={{backgroundColor: "red", width: "100px", padding: "15", borderColor: "black"}} onClick={this.handleUpdateClick}>Actualizar</button>
                         

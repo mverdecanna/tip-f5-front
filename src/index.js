@@ -12,21 +12,21 @@ import DateFnsUtils from '@date-io/date-fns';
 
 const history = browserHistory;
 
-ReactDOM.render(
-  <React.StrictMode>
-     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-         <Router history={history} routes={routes} />
-     </MuiPickersUtilsProvider>,
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
 // ReactDOM.render(
-//   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//       <Router history={history} routes={routes} />
-//   </MuiPickersUtilsProvider>,
+//   <React.StrictMode>
+//      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+//          <Router history={history} routes={routes} />
+//      </MuiPickersUtilsProvider>,
+//   </React.StrictMode>,
 //   document.getElementById('root')
 // );
+
+ReactDOM.render(
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Router history={history} routes={routes} />
+  </MuiPickersUtilsProvider>,
+  document.getElementById('root')
+);
 
 
 

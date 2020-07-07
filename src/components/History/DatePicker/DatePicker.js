@@ -21,9 +21,16 @@ export default function MaterialUIPickers(props) {
   console.log(`**** datePicker older:  ${ JSON.stringify(older) }`);
   console.log(`**** datePicker dayWeek:  ${ JSON.stringify(dayWeek) }`);
 
-  const datePreviousGame = helper.getDateOfThePreviousGame(dayWeek);
+  const datePreviousGame = dayWeek ? helper.getDateOfThePreviousGame(dayWeek) : new Date();
 
-  const [selectedDate, setSelectedDate] = React.useState(datePreviousGame);
+  const isInvalidDate = older ? ( datePreviousGame.isBefore(older) ) : true;
+
+  //const minDateToShow = datePreviousGame.isBefore(older) ? older : datePreviousGame;
+
+  //console.log(`**** datePicker minDateToShow:  ${ minDateToShow }`);
+
+  const [selectedDate, setSelectedDate] = React.useState( isInvalidDate ? null : datePreviousGame );
+  //const [selectedDate, setSelectedDate] = React.useState( datePreviousGame );
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -39,7 +46,11 @@ export default function MaterialUIPickers(props) {
       <Grid container justify="space-around">
         <KeyboardDatePicker
 
-          //disabled={ true}//older > helper.getDateOfThePreviousGame(dayWeek) }
+          //helperText={ datePreviousGame.isBefore(older) ? "Todavía no hay historial!" : "Selecciona la fecha del partido" }
+          helperText={ isInvalidDate ? "Todavía no hay historial!" : "Busca en el historial de partidos" }
+          //disabled={ datePreviousGame.isBefore(older) }
+          disabled={ isInvalidDate }
+          
           keyboardIcon={<EventIcon style={{fontSize: "xx-large", color: "black"}}/>}
           shouldDisableDate={disableDays}
           //disableToolbar={true}
