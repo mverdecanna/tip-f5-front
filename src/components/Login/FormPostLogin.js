@@ -25,7 +25,12 @@ const FormPostLogin = (props) => {
     const onClickCreateGroup = () => {
 
         props.doCreateGroup();
+    }
 
+
+    const onClickExit = () => {
+
+        props.doExit();
     }
 
     
@@ -63,6 +68,12 @@ const FormPostLogin = (props) => {
                     <br></br>
 
                     <button  type="submit" className="btn btn-secondary" onClick={onClickCreateGroup}>Crear Grupo</button>
+
+
+                    <br></br>
+                    <br></br>
+
+                    <button  type="submit" className="btn btn-exit" onClick={onClickExit}>Salir</button>
                     
 
 

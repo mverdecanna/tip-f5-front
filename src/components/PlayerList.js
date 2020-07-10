@@ -274,8 +274,11 @@ class PlayerList extends Component {
                     <div style={{display: "inline-flex", justifyContent: "space-between", width: "90%", fontFamily: "fantasy", fontSize: "xx-large"}}>
                         <h1>JUGADORES DISPONIBLES</h1>
                         <div>
+                             {/* buttonConfirmGame */}
                             {
-                                buttonConfirmGame ? <ConfirmGame confirm={this.handleConfirmGame}
+                                confirmedPlayers.length === 10 
+
+                                                 ? <ConfirmGame confirm={this.handleConfirmGame}
                                                                  effect={this.effectWhistle} 
                                                                  statusConfirmed={gameConfirmed} 
                                                                  dateToButton={dateToButton} /> 
@@ -294,7 +297,7 @@ class PlayerList extends Component {
                     <br/><br/>
 
                         {
-                            players.length === 0 && confirmedPlayers === 0
+                            players.length === 0 && confirmedPlayers.length === 0
                                 ? <strong>No hay jugadores disponibles por el momento</strong> 
                                 : 
                                 <Container>

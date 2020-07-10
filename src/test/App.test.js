@@ -1,10 +1,10 @@
 import React from 'react';
 import {Router} from 'react-router';
 //import { render } from '@testing-library/react';
-import App from './App';
-import Login from '../src/components/Login/Login';
-import MenuBar from '../src/components/Menu/MenuBar';
-import Effect from '../src/components/Login/Effect';
+import App from '../App';
+import Login from '../components/Login/Login';
+import MenuBar from '../components/Menu/MenuBar';
+import Effect from '../components/Login/Effect';
 import { shallow, render, mount } from 'enzyme';
 
 

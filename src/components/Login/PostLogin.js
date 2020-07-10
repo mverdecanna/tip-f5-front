@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './postLoginStyle.css';
 import FormPostLogin from './FormPostLogin';
 import GroupService from '../../services/GroupService';
+import UserService from '../../services/UserService';
 import f5_redondo from '../../images/logo_redondo.png';
 import Helper from '../../util/Helper';
 
@@ -17,6 +18,8 @@ class PostLogin extends Component {
         this.doLoginGroup = this.doLoginGroup.bind(this);
 
         this.doCreateGroup = this.doCreateGroup.bind(this);
+        
+        this.doExit = this.doExit.bind(this);
 
         this.state = {
             loginGroupError: false,
@@ -38,11 +41,21 @@ class PostLogin extends Component {
     // }
 
 
+    doExit = async () => {
+
+        const { logout } = this.props;
+
+        logout();
+    
+        await UserService.logoutUser();
+        this.props.router.push('/login');
+    }
+
+
 
     doCreateGroup = async () => {
 
         this.props.router.push('/createGroup');
-
     }
 
 
@@ -109,7 +122,8 @@ class PostLogin extends Component {
                     <h1 className="form-heading" style={{fontSize: "38px"}}>F5</h1>
                     <img src={f5_redondo}  alt="logo" width="52px" />
                 </div>    
-                    <FormPostLogin doLoginGroup={this.doLoginGroup} doCreateGroup={this.doCreateGroup}  loginGroupError={loginGroupError} loadingGroup={loadingGroup}></FormPostLogin>
+                    <FormPostLogin doLoginGroup={this.doLoginGroup} doCreateGroup={this.doCreateGroup} doExit={this.doExit}
+                        loginGroupError={loginGroupError} loadingGroup={loadingGroup}> </FormPostLogin>
                    
                 </div> 
             </div>
