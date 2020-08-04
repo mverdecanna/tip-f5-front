@@ -218,13 +218,15 @@ class Registration extends Component {
             }else{
     
                 this.setRegistrationOK(false);
-                this.setErrorMessage("Error al intentar registrarte");
+                const msg_error = (response && response.status === 409) ? "El mail ingresado ya esta registrado!" : "Error al intentar registrarte";
+                console.log(`*-*-*-*-*-*-*-*  registrate  entro al ELSE  :  ${ JSON.stringify(response) }`);
+                this.setErrorMessage(msg_error);
             }
             
         }catch(e){
             
             this.setRegistrationOK(false);
-            this.setErrorMessage("error 2");
+            this.setErrorMessage("ERROR inesperado");
             console.log(`*******   registrate   ERROR:  ${ e }`);
         }
     }

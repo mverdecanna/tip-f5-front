@@ -21,9 +21,11 @@ export default function MaterialUIPickers(props) {
   console.log(`**** datePicker older:  ${ JSON.stringify(older) }`);
   console.log(`**** datePicker dayWeek:  ${ JSON.stringify(dayWeek) }`);
 
-  const datePreviousGame = dayWeek ? helper.getDateOfThePreviousGame(dayWeek) : new Date();
+  const datePreviousGame = ( dayWeek !== undefined ) ? helper.getDateOfThePreviousGame(dayWeek) : moment();
 
-  const isInvalidDate = older ? ( datePreviousGame.isBefore(older) ) : true;
+  console.log(`**** datePicker datePreviousGame:  ${ JSON.stringify(datePreviousGame) }`);
+
+  const isInvalidDate = older ? datePreviousGame.isBefore(older) : true;
 
   //const minDateToShow = datePreviousGame.isBefore(older) ? older : datePreviousGame;
 

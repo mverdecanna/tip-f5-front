@@ -38,6 +38,7 @@ class GlobalState extends Component {
 
             const group = await groupService.currentGroup(user.groupId, user.email);
             console.log(`****  GlobalState  evalInit  group:  ${ JSON.stringify(group) }`);
+            console.log(`****  GlobalState  evalInit  group.day:  ${ JSON.stringify(group.day) }`);
 
             this.setState({
                 authOK: true,

@@ -90,7 +90,7 @@ const { host_backend,
 
         const endpoint = host_backend + endpoint_register;
 
-        const result = await axios.post(endpoint, {   data: {
+        var result = await axios.post(endpoint, {   data: {
                                                         email: email,
                                                         nickname: nickname,
                                                         name: name,
@@ -106,10 +106,18 @@ const { host_backend,
                                                     }, {withCredentials: true})
 
         .catch(function(error){
-            console.log(error);
+            console.log(`***********-- registerUser CATCH error:  ${ JSON.stringify(error) }`);
+            if(error.message && error.message.includes("409")){
+                console.log(`***********-- registerUser seeeeeeeeeeeeeeeeee:  ${ JSON.stringify(error) }`);
+                result = {
+                    status: 409
+                }
+                console.log(`***********-- registerUser seeeeeeeeeeeeeeeeee:  ${ JSON.stringify(result) }`);
+                return result;
+            }
         });
 
-        console.log(`***********-- logout RESULT:  ${ JSON.stringify(result) }`);
+        console.log(`***********-- registerUser RESULT:  ${ JSON.stringify(result) }`);
 
         return result;
     }
